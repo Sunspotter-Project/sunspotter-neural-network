@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  form(action= downloadurl method='POST')
+    label(for='datetimefrom') Datetime from:
+    |
+    |
+    input(type='datetime-local' id='datetimefrom' name='datetimefrom')
+    |
+    |
+    label(for='datetimeto') Datetime to:
+    |
+    |
+    input(type='datetime-local' id='datetimeto' name='datetimeto')
+    |
+    |
+    label(for='timeinterval') Time interval in hours:
+    |
+    |
+    input(type='number' id='timeinterval' name='timeinterval')
+    br
+    br
+    label(for='webcamid') Webcam ID:
+    |
+    |
+    input(type='text' name='webcamid' id='webcamid')
+    br
+    br
+    label(for='webcamurl') Webcam url:
+    |
+    |
+    input(type='text' name='webcamurl' id='webcamurl')
+    |
+    |
+    button(type='submit') Download images from webcam
