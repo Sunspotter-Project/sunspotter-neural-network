@@ -1,0 +1,34 @@
+extends layout
+
+block append head
+  link(rel='stylesheet', href='/javascripts/leaflet/leaflet.css')
+  link(rel='stylesheet', href='/stylesheets/fontawesome/css/all.css')
+  script(src='/javascripts/leaflet/leaflet.js')
+
+block content
+  .header
+    block content
+    #title
+      span= title
+    #actions
+      block actions
+        .btnAction
+          block btnActionScrape
+            button(class='btnActionScrape', onclick='initWebcams()') Scrape webcams
+        .btnAction
+          block btnGeocode
+            button(class='btnActionGeocodeAllWebcams', onclick='geocodeAllWebcams()') Geocode all webcams
+        .btnAction
+          block btnPredictAll
+            button(class='btnActionPredictAllWebcams', onclick='predictAllWebcams()') Predict all webcams
+  .webcamoverview
+    block content
+    #webcamlist
+      block webcamlist
+        p nothing
+    #webcammap
+      block webcammap(class='webcammap')
+          p nothing
+
+  block scripts
+    script(src='/javascripts/webcammap.js')
