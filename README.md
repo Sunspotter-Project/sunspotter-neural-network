@@ -9,7 +9,7 @@ Projektarbeit für das Modul Applied Data Science von Claudio Hauser, Matthias C
 ### Importing a Keras model into TensorFlow.js
 https://www.tensorflow.org/js/tutorials/conversion/import_keras
 
-```tensorflowjs_converter --input_format keras sunSpotter_keras_transferLearning_model.h5 tfjs_model````
+```tensorflowjs_converter --input_format keras sunSpotter_keras_transferLearning_model.h5 tfjs_model```
 
 
 
