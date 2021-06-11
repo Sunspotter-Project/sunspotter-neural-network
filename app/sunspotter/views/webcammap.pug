@@ -12,13 +12,17 @@ block content
       span= title
     #actions
       block actions
-        .btnAction
+        .actionElement
           block btnActionScrape
             button(class='btnActionScrape', onclick='initWebcams()') Scrape webcams
-        .btnAction
+        .actionElement
           block btnGeocode
             button(class='btnActionGeocodeAllWebcams', onclick='geocodeAllWebcams()') Geocode all webcams
-        .btnAction
+        .actionElement
+          block chkUseGeocodeService
+            input(type="checkbox",id="chkUseGeocodeService",name="chkUseGeocodeService",value="useGeocodeService")
+            label(for="chkUseGeocodeService") Use gecode service
+        .actionElement
           block btnPredictAll
             button(class='btnActionPredictAllWebcams', onclick='predictAllWebcams()') Predict all webcams
   .webcamoverview

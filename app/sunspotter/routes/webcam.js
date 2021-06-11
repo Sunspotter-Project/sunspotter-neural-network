@@ -3,7 +3,11 @@ var fs = require('fs');
 var fetch = require('node-fetch');
 var sqlite = require("../db/aa-sqlite");
 var dbwebcam = require('../db/webcam');
-const jsdom = require("jsdom");
+var dbprediction = require('../db/prediction');
+var jsdom = require("jsdom");
+var tf = require('@tensorflow/tfjs');
+var tfnode = require('@tensorflow/tfjs-node');
+
 const { urlencoded, json } = require('express');
 const { JSDOM } = jsdom;
 var router = express.Router();
@@ -82,12 +86,25 @@ router.get('/geocode', async function(req, res, next) {
   var allwebcams;
   var webcamObj;
   var latlong;
+  var useGeocodeService;
+
+  useGeocodeService = (req.query.useGeocodeService.toLowerCase() === 'true');
+
   try {
     allwebcams = await dbwebcam.getAllWhereTitleIsSetAndNotGeocoded();
     for(var i = 0; i < allwebcams.length; i++) {
       webcamObj = allwebcams[i];
       console.log("Get LatLong for webcam:", webcamObj.ID, webcamObj.title);
-      latlong = await getWebcamLatLong(webcamObj.title); 
+      
+      if (useGeocodeService) {
+        latlong = await getWebcamLatLong(webcamObj.title, webcamObj.webcamid); 
+      } else {
+        latlong = await getWebcamLatLongFromCache(webcamObj.title, webcamObj.webcamid);
+        if (latlong === null) {
+          latlong = await getWebcamLatLong(webcamObj.title, webcamObj.webcamid); 
+        }
+      }
+      
       if (latlong != null) {
         await dbwebcam.updateLatLong(webcamObj.ID, latlong.lat, latlong.long);
       } 
@@ -97,6 +114,89 @@ router.get('/geocode', async function(req, res, next) {
     res.send('Error during geocode webcam positions: ' + err);
   }
 });
+
+/* init webcam database */
+router.get('/predictall', async function(req, res, next) {
+  var allwebcams;
+  var webcamObj;
+  var webcamid;
+  var webcamImage;
+  var webcamImageFile;
+  var prediction;
+  var modelType;
+  var backInTimeOffesetInMinutes = 15; 
+  var urlTemplate = `https://www.foto-webcam.eu/webcam/%webcamid/%YYYY/%mm/%dd/%HH%MM_la.jpg`;
+  var dateTime = new Date();
+  
+  var model;
+  const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/model.json');
+
+  if (modelType === 'keras') {
+    model = resnet_v2_50;
+  } else {
+    model = resnet_v2_50;
+  }
+
+  modelType = req.query.mt.toLowerCase();
+  dateTime.setMinutes(dateTime.getMinutes() - backInTimeOffesetInMinutes);
+
+  try {
+    // initialize prediction
+    dbprediction.init();
+    
+    allwebcams = await dbwebcam.getAll();
+    for(var i = 0; i < allwebcams.length; i++) {
+      webcamObj = allwebcams[i];
+      console.log("Do prediction for webcam:", webcamObj.ID, webcamObj.title);
+      webcamid = webcamObj.webcamid;
+      webcamImage = buildWebcamImage(webcamid, urlTemplate, dateTime)
+      webcamImageFile = downloadImage(webcamImage, `./predicted/${webcamid}-`);
+      if (webcamImageFile !== "") {
+        prediction = await predictWebcam(webcamid, webcamImageFile, model);
+        if (prediction !== null) {
+          dbprediction.insert(i, fkwebcam, prediction.result, webcamImageFile, dateTime);
+        } else {
+          console.log(`Prediction of ${webcamImageFile} (webcamid: ${webcamid}) failed. No prediction result`);
+        }
+      } else {
+        console.log(`Can't make webcam prediction for the webcam (webcamid: ${webcamid})`);
+      }
+    }
+    res.send(allwebcams);
+  } catch(err) {
+    res.send(`Error during predict webcam (webcamid: ${webcamid}): ` + err);
+  }
+});
+
+async function predictWebcam(webcamid, webcamImageFile, model) {
+  var tfImage;
+  var prediction;
+
+  try 
+  {
+    tfImage = getTfImage(webcamImageFile);
+    prediction = model.predict(tfImage);
+  } catch(err) {
+    console.log(`Error predicting image: ${webcamImageFile}`);
+  }
+  return prediction;
+}
+
+function getTfImage(imagefilename)
+{
+  var imageBuffer;
+  var tfImage = null;
+
+  try 
+  {
+    imageBuffer = fs.readFileSync(imagefilename);
+    tfimage = tfnode.node.decodeImage(imageBuffer);
+  } catch(err) {
+    console.error(err);
+    tfImage = null;
+  }
+  return tfImage;
+}
 
 /* get webcam list either from cache or scrape directly from website */
 router.get('/list', async function(req, res, next) {
@@ -111,7 +211,7 @@ router.get('/list', async function(req, res, next) {
   res.send(webcamlist);
 });
 
-async function getWebcamLatLong(title) {
+async function getWebcamLatLong(title, webcamid) {
   var point = null;
   var urlencodedTitle = encodeURIComponent(title);
   var apikey = '5b3ce3597851110001cf62481cd8cf137a244c0da87f7abaab6cfc9f';
@@ -119,7 +219,9 @@ async function getWebcamLatLong(title) {
 
   var urlWithBB = `https://api.openrouteservice.org/geocode/search?api_key=${apikey}&text=${urlencodedTitle}&size=1${boundingboxCentralEurope}`;
   var url = `https://api.openrouteservice.org/geocode/search?api_key=${apikey}&text=${urlencodedTitle}&size=1`;
-  
+  var filename;
+  var jsonObjAsString;
+
   try {
     // geocode the webcam position
     var fetchOptions = {
@@ -132,6 +234,38 @@ async function getWebcamLatLong(title) {
     const response = await fetch(url, fetchOptions);
     // get json response
     const jsonObj = await response.json();
+
+    if (jsonObj.error === undefined) {
+      // response from gecode service doesn't contain an error
+      try {
+        jsonObjAsString = JSON.stringify(jsonObj);
+        filename = `./geocode-cache/${webcamid}.json`;
+        fs.writeFileSync(filename, jsonObjAsString);
+        console.log(`Gecode response saved for webcam: ${webcamid} in ${filename}`);
+      } catch (err) {
+          console.error(err);
+      }
+  
+      // try to get the point
+      point = getPoint(jsonObj);
+    } 
+  } catch(err) {
+    console.error(err);
+  }
+  return point;
+}
+
+async function getWebcamLatLongFromCache(title, webcamid) {
+  var point = null;
+  var jsonObj;
+  var filename;
+  var jsonAsString;
+
+  try {
+    filename = `./geocode-cache/${webcamid}.json`;
+    jsonAsString = fs.readFileSync(filename, { encoding: 'utf-8' });
+    jsonObj = JSON.parse(jsonAsString);
+    console.log(`Read LatLong for webcam: ${webcamid} from cache ${filename}`);
     // try to get the point
     point = getPoint(jsonObj);
   } catch(err) {
@@ -241,17 +375,21 @@ async function downloadImage(image, pathToSave) {
   const response = await fetch(image.url);
   const buffer = await response.buffer();
   const dirExists = fs.existsSync(pathToSave);
-  
-  if (!dirExists) {
-    await makefolder(pathToSave);
+  var filename;
+  try {
+
+    if (!dirExists) {
+      await makefolder(pathToSave);
+    }
+    filename = `${pathToSave}${image.filename}`;
+    fs.writeFileSync(filename, buffer);
+  } 
+  catch(err)
+  {
+    console.error(err);
+    filename = "";
   }
-  fs.writeFile(`${pathToSave}${image.filename}`, buffer, (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log('finished downloading!');
-      }
-    });
+  return filename;
 }
 
 function makefolder (folder) {

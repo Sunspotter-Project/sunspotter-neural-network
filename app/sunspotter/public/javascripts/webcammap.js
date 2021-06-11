@@ -159,4 +159,59 @@ async function getWebcamList() {
     return webcamlist;
   }
 
+  async function geocodeAllWebcams() {
+    var webcamlist = [];
+    var url;
+    var chkUseGeocodeService; 
+    var useGeocodeService = false;
+    
+    // read checkbox use geocode service state
+    chkUseGeocodeService = document.getElementById("chkUseGeocodeService")
+    if (chkUseGeocodeService !== null) {
+      useGeocodeService = chkUseGeocodeService.checked;
+    }
+    url = `./geocode?useGeocodeService=${useGeocodeService}`;
+
+    try {
+      // geocode the webcam position
+      var fetchOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        }
+      }
+      const response = await fetch(url, fetchOptions);
+      // get json response
+      webcamlist = await response.json();
+      renderWebcamList('webcamlist', webcamlist);
+    } catch(err) {
+        webcamlist = [];
+        console.error(err);
+    }
+    return webcamlist;
+  }
+
+  async function predictAllWebcams() {
+    var webcamlist = [];
+    var url = `./predictall`;
+    
+    try {
+      // geocode the webcam position
+      var fetchOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8'
+        }
+      }
+      const response = await fetch(url, fetchOptions);
+      // get json response
+      webcamlist = await response.json();
+      renderWebcamList('webcamlist', webcamlist);
+    } catch(err) {
+        webcamlist = [];
+        console.error(err);
+    }
+    return webcamlist;
+  }
+
  loadWebcamList('webcamlist');
