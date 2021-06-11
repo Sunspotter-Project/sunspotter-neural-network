@@ -129,9 +129,9 @@ router.get('/predictall', async function(req, res, next) {
   var dateTime = new Date();
   
   var model;
-  const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/model.json');
+  const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/resnet_v2_50.json');
 
-  if (modelType === 'keras') {
+  if (modelType === 'resnet_v2_50') {
     model = resnet_v2_50;
   } else {
     model = resnet_v2_50;
