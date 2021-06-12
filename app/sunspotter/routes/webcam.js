@@ -7,6 +7,7 @@ var dbprediction = require('../db/prediction');
 var jsdom = require("jsdom");
 var tf = require('@tensorflow/tfjs');
 var tfnode = require('@tensorflow/tfjs-node');
+var {spawn} = require('child_process');
 
 const { urlencoded, json } = require('express');
 const { JSDOM } = jsdom;
@@ -129,7 +130,9 @@ router.get('/predictall', async function(req, res, next) {
   var dateTime = new Date();
   
   var model;
-  const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/resnet_v2_50.json');
+  //const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/resnet_v2_50.json');
+
+  const resnet_v2_50 = await tf.loadGraphModel('http://localhost:3000/tf/resnet_v2_50.json');
 
   if (modelType === 'resnet_v2_50') {
     model = resnet_v2_50;
