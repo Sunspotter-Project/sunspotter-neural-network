@@ -12,6 +12,7 @@ from random import *
 #from tensorflow.keras.models import Sequential
 #import tensorflow_hub as hub
 
+# debug flags
 downloadImage = 0
 saveImage = 0
 
@@ -23,6 +24,7 @@ base_path = file_path[0:idxOfProjectFolder] + project_folder + "\\"
 img_predicted_path = base_path + 'app\\sunspotter\\public\\images\\predicted\\'
 db_path = base_path + "app\\sunspotter\\db\\"
 tfmodel_path = base_path + "code\\jupyterNotebook\\"
+modelname = 'res_net'
 
 # delete all predicted imagesn
 for file_name in listdir(img_predicted_path):
@@ -37,12 +39,13 @@ urlTemplate = datetime.strftime("https://www.foto-webcam.eu/webcam/{0}/%Y/%m/%d/
 
 cur = con.cursor()
 # delete and create prediction table
+
 try:
-    cur.execute("DROP TABLE prediction")
+    con.execute("DROP TABLE prediction")
 except:
     print("Table prediction doesn't exists.")
-cur.execute("CREATE TABLE prediction(ID integer NOT NULL PRIMARY KEY, fkwebcam integer, result number, imgurl text, timestamp text)")
-con.commit()
+con.execute("CREATE TABLE prediction (ID integer, fkwebcam integer, result integer, imgurl text, modelname text, timestamp text)")
+#con.commit()
 
 pkprediction = 0
 # loop over all webcams and download the image from the actual hour (e.g: 12:00)
@@ -59,12 +62,12 @@ for webcamrow in webcamrows.fetchall():
     else:
         status_code = 200
     if status_code == 200:
-        filename = webcamid + "-%Y-%m-%d_%H-00.jpg"
-        filename = img_predicted_path + datetime.strftime(filename)
+        filename = datetime.strftime(webcamid + "-%Y-%m-%d_%H-00.jpg")
+        full_filename = img_predicted_path + filename
         # save the file to local disk
-        print("Write file: " + filename)
+        print("Write file: " + full_filename)
         if saveImage:
-            f = open(filename,'wb')
+            f = open(full_filename,'wb')
             f.write(response.content)
             f.close()
         utcnowStr = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f%z")
@@ -73,7 +76,7 @@ for webcamrow in webcamrows.fetchall():
         prediction = randint(0, 1)
 
         # save the prediction to the database
-        cur.execute("INSERT INTO prediction values (?, ?, ?, ?, ?)", (pkprediction, pkwebcam, prediction, filename, utcnowStr))
+        cur.execute("INSERT INTO prediction VALUES (?, ?, ?, ?, ?, ?)", (pkprediction, pkwebcam, prediction, filename, modelname, utcnowStr))
         pkprediction = pkprediction + 1
 con.commit()
 con.close()
