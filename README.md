@@ -15,3 +15,11 @@ https://www.tensorflow.org/js/tutorials/conversion/import_keras
 
 ```tensorboard --logdir /my_logs_transferLearning```
 
+#### Start Sun spotter webapp
+
+```./app>docker-compose up```
+
+or if you want to fore a rebuild of the container:
+
+```./app>docker-compose up --build```
+
