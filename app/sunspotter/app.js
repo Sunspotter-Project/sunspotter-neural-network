@@ -5,18 +5,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-sqlite.open('./db/webcam.db');
+var dbfile = './db/webcam.db';
 
-
-const url = "https://www.something.com/.../image.jpg"
-
-async function download() {
-  const response = await fetch(url);
-  const buffer = await response.buffer();
-  fs.writeFile(`./image.jpg`, buffer, () => 
-    console.log('finished downloading!'));
-}
-
+sqlite.open(dbfile).catch(function(err) { console.error(err + ', DB file: ' + dbfile); });
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

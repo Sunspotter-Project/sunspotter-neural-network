@@ -12,25 +12,28 @@ block content
     label(for='datetimeto') Datetime to:
     |
     |
-    input(type='datetime-local' id='datetimeto' name='datetimeto')
+    input(type='datetime-local' id='datetimeto' name='datetimeto' value=datetimeto max=datetimeto)
     |
     |
     label(for='timeinterval') Time interval in hours:
     |
     |
-    input(type='number' id='timeinterval' name='timeinterval')
+    input(type='number' id='timeinterval' name='timeinterval' value='24')
     br
     br
     label(for='webcamid') Webcam ID:
     |
     |
-    input(type='text' name='webcamid' id='webcamid')
+    input(type='text' name='webcamid' id='webcamid', value=webcamid)
     br
     br
     label(for='webcamurl') Webcam url:
     |
     |
-    input(type='text' name='webcamurl' id='webcamurl')
+    input(type='text' name='webcamurl' id='webcamurl' value='https://www.foto-webcam.eu/webcam/%webcamid/%YYYY/%mm/%dd/%HH%MM_la.jpg')
     |
     |
     button(type='submit') Download images from webcam
+    br
+    br
+    a(href='./map') Webcam map

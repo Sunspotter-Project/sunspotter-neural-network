@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  sunspotter:
+    build: ./sunspotter
+    
+    ports:
+    - "3000:3000"
+    
+    volumes:
+    # all downloaded webcam images get stored in the ./sunspotter/downloads path
+    - ./sunspotter/downloads:/opt/sunspotter/downloads

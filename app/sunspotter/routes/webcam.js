@@ -1,17 +1,12 @@
 var express = require('express');
 var fs = require('fs');
 var fetch = require('node-fetch');
-var sqlite = require("../db/aa-sqlite");
 var dbwebcam = require('../db/webcam');
 var dbprediction = require('../db/prediction');
 var jsdom = require("jsdom");
-var tf = require('@tensorflow/tfjs');
-var tfnode = require('@tensorflow/tfjs-node');
-var {spawnSync,spawn} = require('child_process');
+var {spawnSync} = require('child_process');
+var { JSDOM } = jsdom;
 
-const { urlencoded, json } = require('express');
-const prediction = require('../db/prediction');
-const { JSDOM } = jsdom;
 var router = express.Router();
 
 /* GET webcam list. */
@@ -56,8 +51,30 @@ async function loadPredictionsForWebcams(webcams) {
 
 /* GET webcam download page. */
 router.get('/download', function(req, res, next) {
-  res.render('webcam', { title: 'Download webcam images', downloadurl: './download' });
+  var webcamid = req.query.webcamid;
+  if (webcamid === undefined) {
+    webcamid = '';
+  }
+  
+  var datetimeto = getLocalDateTimeNowString();
+  res.render('webcam', { title: 'Download webcam images', downloadurl: './download', webcamid: webcamid, datetimeto: datetimeto });
 });
+
+function getLocalDateTimeNowString() {
+  var datetimenow = new Date();
+  var month = datetimenow.getMonth() + 1;
+  if (month < 10) {
+    month = '0' + month;
+  }
+
+  var day = datetimenow.getDate();
+  if (day < 10) {
+    day = '0' + day;
+  }
+  
+  var dateTimeNowString = datetimenow.getFullYear() + '-' + month + '-'+ day + 'T' + datetimenow.toLocaleTimeString();
+  return dateTimeNowString;
+}
 
 /* POST download images from webcam */
 router.post('/download', function(req, res, next) {
@@ -81,13 +98,13 @@ router.post('/download', function(req, res, next) {
 
     res.send(images);
   } else {
-    res.send('respond with a resource');
+    res.send('Not all fields are set! Check datetimeFrom, datetimeTo and webcamurl.');
   }
 });
 
 /* GET webcam map page. */
 router.get('/map', function(req, res, next) {
-  res.render('webcammap', { title: '☀︎ Webcam weather' });
+  res.render('webcammap', { title: '☀︎ Sun spotter' });
 });
 
 /* init webcam database */
@@ -105,7 +122,9 @@ router.get('/init', async function(req, res, next) {
 
     res.send(webcamlist);
   } catch(err) {
-    res.send('Error during initializing database: ' + err);
+    var errMsg = `Error during initializing webcan database: ` + err;
+    console.error(errMsg);
+    res.send({ error: errMsg });
   }
 });
 
@@ -141,7 +160,9 @@ router.get('/geocode', async function(req, res, next) {
     await loadPredictionsForWebcams(webcams);
     res.send(webcams);
   } catch(err) {
-    res.send('Error during geocode webcam positions: ' + err);
+    var errMsg = `Error during geocode webcam positions: ` + err;
+    console.error(errMsg);
+    res.send({ error: errMsg });
   }
 });
 
@@ -196,36 +217,6 @@ function uint8ArrayToString(uint8array)
     string = textDecoder.decode(uint8array);
   }
   return string;
-}
-
-async function predictWebcam(webcamid, webcamImageFile, model) {
-  var tfImage;
-  var prediction;
-
-  try 
-  {
-    tfImage = getTfImage(webcamImageFile);
-    prediction = model.predict(tfImage);
-  } catch(err) {
-    console.log(`Error predicting image: ${webcamImageFile}`);
-  }
-  return prediction;
-}
-
-function getTfImage(imagefilename)
-{
-  var imageBuffer;
-  var tfImage = null;
-
-  try 
-  {
-    imageBuffer = fs.readFileSync(imagefilename);
-    tfimage = tfnode.node.decodeImage(imageBuffer);
-  } catch(err) {
-    console.error(err);
-    tfImage = null;
-  }
-  return tfImage;
 }
 
 /* get webcam list either from cache or scrape directly from website */
@@ -396,8 +387,13 @@ function buildWebcamTitle(title) {
 function buildWebcamId(webcamIdWithUrl) {
   var webcamid;
   
+  console.log(`webcamidwithurl: ${webcamIdWithUrl}`);
+
   webcamid = webcamIdWithUrl.replace('webcam', '');
-  webcamid = webcamid.replaceAll('/', '');
+  webcamid = webcamid.replace(/\//g, '');
+
+  console.log(`replaced webcamid: ${webcamIdWithUrl}`);
+
   return webcamid;
 }
 

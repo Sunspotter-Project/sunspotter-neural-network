@@ -94,6 +94,11 @@ a {
   margin-top: 2px;
 }
 
+.webcamlist-item-data-scrapelink {
+  margin-top: 4px;
+  font-size: 12px;
+}
+
 .prediction-label {
   border-radius: 4px;
   padding: 4px;

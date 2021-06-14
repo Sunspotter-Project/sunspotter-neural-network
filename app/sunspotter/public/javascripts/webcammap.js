@@ -8,17 +8,6 @@ var openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'
 
 openTopoMap.addTo(map);
 
-/*
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: 'mapbox/streets-v11',
-		tileSize: 512,
-		zoomOffset: -1
-    }).addTo(map);
-    */
-
 var webcamlist;
 var mapMarkers = [];
 
@@ -85,7 +74,7 @@ async function getWebcamList() {
       imgurl = webcam.imgurl;
     }
     
-    return `<div class="webcamlist-item"><div class="webcamlist-item-img"><img src="${imgurl}" /></div><div class="webcamlist-item-data"><div class="webcamlist-item-data-title">${webcam.title}</div><div class="webcamlist-item-data-prediction">${predictionLabel}</div></div></div>`;
+    return `<div class="webcamlist-item"><a href="${imgurl}" alt="${webcam.title}"><div class="webcamlist-item-img"><img src="${imgurl}" /></div></a><div class="webcamlist-item-data"><div class="webcamlist-item-data-title">${webcam.title}</div><div class="webcamlist-item-data-prediction">${predictionLabel}</div><div class="webcamlist-item-data-scrapelink"><a href="./download?webcamid=${webcam.webcamid}"><i class="fas fa-file-download"></i>&nbsp;Scrape</a></div></div></div>`;
   }
 
 
@@ -181,10 +170,15 @@ async function getWebcamList() {
       const response = await fetch(url, fetchOptions);
       // get json response
       webcamlist = await response.json();
-      renderWebcamList('webcamlist', webcamlist);
+      if (webcamlist.error === undefined) {
+        renderWebcamList('webcamlist', webcamlist);
+      } else {
+        throw webcamlist.error;
+      }
     } catch(err) {
         webcamlist = [];
         console.error(err);
+        alert(err);
     }
     return webcamlist;
   }
@@ -213,10 +207,15 @@ async function getWebcamList() {
       const response = await fetch(url, fetchOptions);
       // get json response
       webcamlist = await response.json();
-      renderWebcamList('webcamlist', webcamlist);
+      if (webcamlist.error === undefined) {
+        renderWebcamList('webcamlist', webcamlist);
+      } else {
+        throw webcamlist.error;
+      }
     } catch(err) {
         webcamlist = [];
         console.error(err);
+        alert(err);
     }
     return webcamlist;
   }

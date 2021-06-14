@@ -4,7 +4,7 @@ var db
 exports.db = db;
 
 exports.open=function(path) {
-    return new Promise(function(resolve) {
+    return new Promise(function(resolve, reject) {
     this.db = new sqlite3.Database(path, 
         function(err) {
             if(err) reject("Open error: "+ err.message)
