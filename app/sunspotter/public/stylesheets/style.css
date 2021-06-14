@@ -76,7 +76,7 @@ a {
 }
 
 .webcamlist-item-img > img {
-  min-width: 100px;
+  max-width: 100px;
 }
 
 .webcamlist-item-data {
@@ -112,8 +112,8 @@ a {
 }
 
 .prediction-label-sunny {
-  background-color: #fcff49;
-  color: #fff;
+  background-color: rgb(63, 207, 255);
+  color: #fcff49;
 }
 
 #webcammap {

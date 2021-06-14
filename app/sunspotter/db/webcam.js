@@ -29,7 +29,7 @@ webcam.getAllWhereTitleIsSetAndNotGeocoded = async function() {
 }
 
 webcam.getAll = async function() {
-    sql = `SELECT * FROM ${this.tablename}`;
+    sql = `SELECT * FROM ${this.tablename} ORDER by title`;
     r = await sqlite.all(sql, []);
     return r;
 }

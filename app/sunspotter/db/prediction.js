@@ -15,6 +15,15 @@ prediction.init = async function() {
     if(r) console.log(`Table ${this.tablename} created`)
 }
 
+prediction.drop = async function() {
+    try {
+        var r = await sqlite.run(`DROP TABLE ${this.tablename}`);
+        if(r) console.log(`Table ${this.tablename} dropped`)
+    } catch(err) {
+        console.log(`Can't drop table ${this.tablename}: ` + err);
+    }
+}
+
 prediction.insert = async function insert(id, fkwebcam, result, imgurl, timestamp) {
     var entry = `'${id}','${fkwebcam}',${result},'${imgurl}',${timestamp}`;
     var sql = `INSERT INTO ${this.tablename}(ID, fkwebcam, result, imgurl, timestamp) VALUES (` + entry + `)`;
@@ -23,8 +32,14 @@ prediction.insert = async function insert(id, fkwebcam, result, imgurl, timestam
 }
 
 prediction.getAll = async function() {
-    sql = `SELECT * FROM ${this.tablename}`;
-    r = await sqlite.all(sql, []);
+    var r = [];
+    var sql = `SELECT * FROM ${this.tablename}`;
+    try {
+        r = await sqlite.all(sql, []);
+    } catch (err) {
+        console.error("Prediction.getAll error: " + err);
+        r = [];
+    }
     return r;
 }
 

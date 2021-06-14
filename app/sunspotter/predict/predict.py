@@ -13,8 +13,8 @@ from random import *
 #import tensorflow_hub as hub
 
 # debug flags
-downloadImage = 0
-saveImage = 0
+downloadImage = 1
+saveImage = 1
 
 # create directory paths
 project_folder = "ads-fs2021-project-sunspotter"
@@ -39,7 +39,6 @@ urlTemplate = datetime.strftime("https://www.foto-webcam.eu/webcam/{0}/%Y/%m/%d/
 
 cur = con.cursor()
 # delete and create prediction table
-
 try:
     con.execute("DROP TABLE prediction")
 except:
@@ -78,5 +77,6 @@ for webcamrow in webcamrows.fetchall():
         # save the prediction to the database
         cur.execute("INSERT INTO prediction VALUES (?, ?, ?, ?, ?, ?)", (pkprediction, pkwebcam, prediction, filename, modelname, utcnowStr))
         pkprediction = pkprediction + 1
+# save all database changes
 con.commit()
 con.close()

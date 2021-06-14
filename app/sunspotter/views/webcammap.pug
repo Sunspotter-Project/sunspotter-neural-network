@@ -14,17 +14,17 @@ block content
       block actions
         .actionElement
           block btnActionScrape
-            button(class='btnActionScrape', onclick='initWebcams()') Scrape webcams
+            button(class='btnActionScrape', onclick='initWebcams()') 1. Scrape webcams
         .actionElement
           block btnGeocode
-            button(class='btnActionGeocodeAllWebcams', onclick='geocodeAllWebcams()') Geocode all webcams
+            button(class='btnActionGeocodeAllWebcams', onclick='geocodeAllWebcams()') 2. Geocode all webcams
         .actionElement
           block chkUseGeocodeService
             input(type="checkbox",id="chkUseGeocodeService",name="chkUseGeocodeService",value="useGeocodeService")
             label(for="chkUseGeocodeService") Use gecode service
         .actionElement
           block btnPredictAll
-            button(class='btnActionPredictAllWebcams', onclick='predictAllWebcams()') Predict all webcams
+            button(class='btnActionPredictAllWebcams', onclick='predictAllWebcams()') 3. Predict all webcams
   .webcamoverview
     block content
     #webcamlist

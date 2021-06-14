@@ -7,24 +7,52 @@ var dbprediction = require('../db/prediction');
 var jsdom = require("jsdom");
 var tf = require('@tensorflow/tfjs');
 var tfnode = require('@tensorflow/tfjs-node');
-var {spawn} = require('child_process');
+var {spawnSync,spawn} = require('child_process');
 
 const { urlencoded, json } = require('express');
+const prediction = require('../db/prediction');
 const { JSDOM } = jsdom;
 var router = express.Router();
 
 /* GET webcam list. */
 router.get('/', async function(req, res, next) {
-  var allwebcams;
-  var webcamObj;
-  var latlong;
+  var webcams;
+
   try {
     webcams = await dbwebcam.getAll();
+    await loadPredictionsForWebcams(webcams);
     res.send(webcams);
   } catch(err) {
     res.send('Error during webcam.getAll: ' + err);
   }
 });
+
+async function loadPredictionsForWebcams(webcams) {
+  var predictions;
+  var prediction;
+  var webcam;
+  try 
+  {
+    predictions = await dbprediction.getAll();
+    if (predictions.length > 0) {
+      for (var t = 0; t < webcams.length; t++) {
+        webcam = webcams[t];
+        for (var i = 0; i < predictions.length; i++) {
+          prediction = predictions[i];
+          if (prediction.fkwebcam === webcam.ID) {
+            if (webcam.predictions === undefined) {
+              webcam.predictions = [];
+            }
+            webcam.predictions.push(prediction);
+          }
+        }
+      }
+    }
+  } catch(err) {
+    res.send('Error during predictions.getAll: ' + err);
+  }
+  return webcams;
+}
 
 /* GET webcam download page. */
 router.get('/download', function(req, res, next) {
@@ -59,15 +87,15 @@ router.post('/download', function(req, res, next) {
 
 /* GET webcam map page. */
 router.get('/map', function(req, res, next) {
-  res.render('webcammap', { title: 'Webcam overview' });
+  res.render('webcammap', { title: '☀︎ Webcam weather' });
 });
 
 /* init webcam database */
 router.get('/init', async function(req, res, next) {
   var webcamlist;
-  var latlong;
-  try {
-    
+  try 
+  {
+    await dbprediction.drop();
     await dbwebcam.init();
 
     webcamlist = await getWebcamListFromFotoWebcamEu();
@@ -75,7 +103,6 @@ router.get('/init', async function(req, res, next) {
       await dbwebcam.insert(i, webcamlist[i].webcamid, webcamlist[i].title, 0.0, 0.0, webcamlist[i].imgurl);
     }
 
-    //sqlite.close();
     res.send(webcamlist);
   } catch(err) {
     res.send('Error during initializing database: ' + err);
@@ -84,7 +111,7 @@ router.get('/init', async function(req, res, next) {
 
 /* init webcam database */
 router.get('/geocode', async function(req, res, next) {
-  var allwebcams;
+  var webcams;
   var webcamObj;
   var latlong;
   var useGeocodeService;
@@ -92,9 +119,9 @@ router.get('/geocode', async function(req, res, next) {
   useGeocodeService = (req.query.useGeocodeService.toLowerCase() === 'true');
 
   try {
-    allwebcams = await dbwebcam.getAllWhereTitleIsSetAndNotGeocoded();
-    for(var i = 0; i < allwebcams.length; i++) {
-      webcamObj = allwebcams[i];
+    webcams = await dbwebcam.getAllWhereTitleIsSetAndNotGeocoded();
+    for(var i = 0; i < webcams.length; i++) {
+      webcamObj = webcams[i];
       console.log("Get LatLong for webcam:", webcamObj.ID, webcamObj.title);
       
       if (useGeocodeService) {
@@ -110,7 +137,9 @@ router.get('/geocode', async function(req, res, next) {
         await dbwebcam.updateLatLong(webcamObj.ID, latlong.lat, latlong.long);
       } 
     }
-    res.send(`Gecoded webcam positions for ${allwebcams.length} webcams.`);
+    webcams = await dbwebcam.getAll();
+    await loadPredictionsForWebcams(webcams);
+    res.send(webcams);
   } catch(err) {
     res.send('Error during geocode webcam positions: ' + err);
   }
@@ -118,58 +147,56 @@ router.get('/geocode', async function(req, res, next) {
 
 /* init webcam database */
 router.get('/predictall', async function(req, res, next) {
-  var allwebcams;
-  var webcamObj;
-  var webcamid;
-  var webcamImage;
-  var webcamImageFile;
-  var prediction;
-  var modelType;
-  var backInTimeOffesetInMinutes = 15; 
-  var urlTemplate = `https://www.foto-webcam.eu/webcam/%webcamid/%YYYY/%mm/%dd/%HH%MM_la.jpg`;
-  var dateTime = new Date();
-  
-  var model;
-  //const resnet_v2_50 = await tf.loadLayersModel('http://localhost:3000/tf/resnet_v2_50.json');
-
-  const resnet_v2_50 = await tf.loadGraphModel('http://localhost:3000/tf/resnet_v2_50.json');
-
-  if (modelType === 'resnet_v2_50') {
-    model = resnet_v2_50;
-  } else {
-    model = resnet_v2_50;
-  }
-
-  modelType = req.query.mt.toLowerCase();
-  dateTime.setMinutes(dateTime.getMinutes() - backInTimeOffesetInMinutes);
+  var predictscript;
+  var python;
+  var predictscriptoutput;
 
   try {
-    // initialize prediction
-    dbprediction.init();
-    
-    allwebcams = await dbwebcam.getAll();
-    for(var i = 0; i < allwebcams.length; i++) {
-      webcamObj = allwebcams[i];
-      console.log("Do prediction for webcam:", webcamObj.ID, webcamObj.title);
-      webcamid = webcamObj.webcamid;
-      webcamImage = buildWebcamImage(webcamid, urlTemplate, dateTime)
-      webcamImageFile = downloadImage(webcamImage, `./predicted/${webcamid}-`);
-      if (webcamImageFile !== "") {
-        prediction = await predictWebcam(webcamid, webcamImageFile, model);
-        if (prediction !== null) {
-          dbprediction.insert(i, fkwebcam, prediction.result, webcamImageFile, dateTime);
-        } else {
-          console.log(`Prediction of ${webcamImageFile} (webcamid: ${webcamid}) failed. No prediction result`);
-        }
-      } else {
-        console.log(`Can't make webcam prediction for the webcam (webcamid: ${webcamid})`);
-      }
+    // call external python predict script
+    predictscript = './predict/predict.py';
+    python = spawnSync('python', [predictscript]);
+    if (python.status > 0) {
+      throw new Error(`Calling ${predictscript} failed with status: ${phyton.status}`);
     }
-    res.send(allwebcams);
+    
+    predictscriptoutput = uint8ArrayToString(python.stdout);
+    console.log(predictscriptoutput);
+
+    webcams = await dbwebcam.getAll();
+    await loadPredictionsForWebcams(webcams);
+    res.send(webcams);
+
   } catch(err) {
-    res.send(`Error during predict webcam (webcamid: ${webcamid}): ` + err);
+    var errMsg = `Error during predict webcams: ` + err;
+    console.error(errMsg);
+    res.send({ error: errMsg });
   }
 });
+
+function uint8ArraysToString(uint8arrays)
+{
+  var uint8array;
+  var string = "";
+  var textDecoder = new TextDecoder();
+
+  for (var i = 0; i < uint8arrays.length; i++) {
+    uint8array = uint8arrays[i];
+    if (uint8array !== null) {
+      string += textDecoder.decode(uint8array);
+    }
+  }
+  return string;
+}
+
+function uint8ArrayToString(uint8array)
+{
+  var string = "";
+  var textDecoder = new TextDecoder();
+  if (uint8array !== null) {
+    string = textDecoder.decode(uint8array);
+  }
+  return string;
+}
 
 async function predictWebcam(webcamid, webcamImageFile, model) {
   var tfImage;

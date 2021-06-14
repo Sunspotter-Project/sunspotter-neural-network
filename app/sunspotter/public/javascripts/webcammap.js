@@ -20,6 +20,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     */
 
 var webcamlist;
+var mapMarkers = [];
 
 async function loadWebcamList(webcamlistElId) {
     try {
@@ -37,6 +38,7 @@ function renderWebcamList(webcamlistElId, webcamlist) {
     var webcamlistEl = document.getElementById(webcamlistElId);
     if (webcamlistEl !== null) {
         try {
+            clearMarkers(map);
             for (var i = 0; i < webcamlist.length; i++) {
                 webcam = webcamlist[i];
                 html += renderWebcamListItem(webcamlist[i]);
@@ -73,10 +75,20 @@ async function getWebcamList() {
 
   function renderWebcamListItem(webcam) {
     var predictionLabel = getWebcamlistPredictionLabelFromPrediction(webcam);  
-    return `<div class="webcamlist-item"><div class="webcamlist-item-img"><img src="${webcam.imgurl}" /></div><div class="webcamlist-item-data"><div class="webcamlist-item-data-title">${webcam.title}</div><div class="webcamlist-item-data-prediction">${predictionLabel}</div></div></div>`;
+    var baseUrl;
+    // if a prediction is available, take the image from the prediction
+    if (webcam.predictions !== undefined && webcam.predictions.length > 0) {
+      prediction = webcam.predictions[0];
+      baseUrl = window.location.host
+      imgurl = `http://${baseUrl}/images/predicted/${prediction.imgurl}`;
+    } else {
+      imgurl = webcam.imgurl;
+    }
+    
+    return `<div class="webcamlist-item"><div class="webcamlist-item-img"><img src="${imgurl}" /></div><div class="webcamlist-item-data"><div class="webcamlist-item-data-title">${webcam.title}</div><div class="webcamlist-item-data-prediction">${predictionLabel}</div></div></div>`;
   }
 
-  
+
 
   function createWebcamMapMarker(webcam, map) {
     var marker;
@@ -85,8 +97,16 @@ async function getWebcamList() {
         markerIcon = getWebcamMapMarkerIconFromPrediction(webcam);
         marker = L.marker([webcam.long, webcam.lat], {icon: markerIcon}).addTo(map);
         marker.bindTooltip(webcam.title);
+        mapMarkers.push(marker);
     }
     return marker;
+  }
+
+  function clearMarkers(map) {
+    for(var i = 0; i < mapMarkers.length; i++){
+      map.removeLayer(mapMarkers[i]);
+    }
+    mapMarkers = [];
   }
 
   var markerIconSunny = L.divIcon({className: 'marker-icon-sunny', html: '<i class="fas fa-sun"></i>', iconSize: ['auto', 'auto']});
@@ -95,11 +115,16 @@ async function getWebcamList() {
 
   function getWebcamMapMarkerIconFromPrediction(webcam) {
     var markerIcon;  
-    if (webcam.prediction !== undefined && webcam.prediction !== null) {
-        if (webcam.prediction.type === 0) {
+    var prediction;
+    var predictionResult;
+    
+    if (webcam.predictions !== undefined && webcam.predictions.length > 0) {
+      prediction = webcam.predictions[0];
+      predictionResult = prediction.result;
+      if (predictionResult === 0) {
             // cloudy
             markerIcon = markerIconCloudy;
-        } else if (webcam.prediction.type === 1) {
+        } else if (predictionResult === 1) {
             // sunny
             markerIcon = markerIconSunny;
         } else {
@@ -107,7 +132,7 @@ async function getWebcamList() {
             markerIcon = markerIconSunny;
         }
       } else {
-        markerIcon = markerIconSunny;
+        markerIcon = markerIconNoPrediction;
       }
       return markerIcon;
   }
@@ -117,22 +142,27 @@ async function getWebcamList() {
     var labelSunny = '<div class="prediction-label prediction-label-sunny"><i class="fas fa-sun"></i>&nbsp;Sunny</div>';
     var labelCloudy = '<div class="prediction-label prediction-label-cloudy"><i class="fas fa-cloud"></i>&nbsp;Cloudy</div>';
     var labelNoprediction = '<div class="prediction-label prediction-label-noprediction"><i class="fas fa-question-circle"></i>&nbsp;Not predicted</div>';
+    var prediction;
+    var predictionResult;
 
-    if (webcam.prediction !== undefined && webcam.prediction !== null) {
-        if (webcam.prediction.type === 0) {
-            // cloudy
-            label = labelCloudy;
-        } else if (webcam.prediction.type === 1) {
-            // sunny
-            label = labelSunny;
-        } else {
-            // unknown prediction type
-            label = labelNoprediction;
-        }
+    if (webcam.predictions !== undefined && webcam.predictions.length > 0) 
+    {
+      prediction = webcam.predictions[0];
+      predictionResult = prediction.result;
+      if (predictionResult === 0) {
+          // cloudy
+          label = `<div class="prediction-label prediction-label-cloudy"><i class="fas fa-cloud"></i>&nbsp;Cloudy, &nbsp;${prediction.timestamp}</div>`;
+      } else if (predictionResult === 1) {
+          // sunny
+          label = `<div class="prediction-label prediction-label-sunny"><i class="fas fa-sun"></i>&nbsp;Sunny,&nbsp;${prediction.timestamp}</div>`;
       } else {
-        label = labelNoprediction;
+          // unknown prediction type
+          label = labelNoprediction;
       }
-      return label;
+    } else {
+      label = labelNoprediction;
+    }
+    return label;
   }
 
 
@@ -206,10 +236,15 @@ async function getWebcamList() {
       const response = await fetch(url, fetchOptions);
       // get json response
       webcamlist = await response.json();
-      renderWebcamList('webcamlist', webcamlist);
+      if (webcamlist.error === undefined) {
+        renderWebcamList('webcamlist', webcamlist);
+      } else {
+        throw webcamlist.error;
+      }
     } catch(err) {
         webcamlist = [];
         console.error(err);
+        alert(err);
     }
     return webcamlist;
   }
