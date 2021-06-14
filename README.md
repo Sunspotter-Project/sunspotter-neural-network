@@ -23,3 +23,8 @@ or if you want to fore a rebuild of the container:
 
 ```./app>docker-compose up --build```
 
+Open the sun spotter app in your web browser
+
+```http://localhost:3000/webcam/map```
+
+
