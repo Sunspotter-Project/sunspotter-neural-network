@@ -81,11 +81,22 @@ async function getWebcamList() {
 
   function createWebcamMapMarker(webcam, map) {
     var marker;
-    var markerIcon;  
+    var markerIcon;
+    var prediction;
+    var confidence;
+    var tooltip;
+
     if (webcam.lat !== undefined && webcam.lat > 0 && webcam.long !== undefined && webcam.long > 0) {
         markerIcon = getWebcamMapMarkerIconFromPrediction(webcam);
         marker = L.marker([webcam.long, webcam.lat], {icon: markerIcon}).addTo(map);
-        marker.bindTooltip(webcam.title);
+        if (webcam.predictions !== undefined && webcam.predictions.length > 0) {
+          prediction = webcam.predictions[0];
+          confidence = roundOff(prediction.confidence * 100.0, 2);
+          tooltip = `${webcam.title} (${confidence}%)`;
+        } else {
+          tooltip = `${webcam.title}`;
+        }
+        marker.bindTooltip(tooltip);
         mapMarkers.push(marker);
     }
     return marker;
@@ -98,8 +109,9 @@ async function getWebcamList() {
     mapMarkers = [];
   }
 
-  var markerIconSunny = L.divIcon({className: 'marker-icon-sunny', html: '<i class="fas fa-sun"></i>', iconSize: ['auto', 'auto']});
   var markerIconCloudy = L.divIcon({className: 'marker-icon-cloudy', html: '<i class="fas fa-cloud"></i>', iconSize: ['auto', 'auto']});
+  var markerIconRainy = L.divIcon({className: 'marker-icon-rainy', html: '<i class="fas fa-cloud"></i>', iconSize: ['auto', 'auto']});
+  var markerIconSunny = L.divIcon({className: 'marker-icon-sunny', html: '<i class="fas fa-sun"></i>', iconSize: ['auto', 'auto']});
   var markerIconNoPrediction = L.divIcon({className: 'marker-icon-noprediction', html: '<i class="fas fa-question-circle"></i>', iconSize: ['auto', 'auto']});
 
   function getWebcamMapMarkerIconFromPrediction(webcam) {
@@ -114,9 +126,12 @@ async function getWebcamList() {
             // cloudy
             markerIcon = markerIconCloudy;
         } else if (predictionResult === 1) {
-            // sunny
-            markerIcon = markerIconSunny;
-        } else {
+            // rainy
+            markerIcon = markerIconRainy;
+        } else if (predictionResult === 2) {
+          // sunny
+          markerIcon = markerIconSunny;
+        }else {
             // unknown prediction type
             markerIcon = markerIconSunny;
         }
@@ -127,9 +142,7 @@ async function getWebcamList() {
   }
 
   function getWebcamlistPredictionLabelFromPrediction(webcam) {
-    var label; 
-    var labelSunny = '<div class="prediction-label prediction-label-sunny"><i class="fas fa-sun"></i>&nbsp;Sunny</div>';
-    var labelCloudy = '<div class="prediction-label prediction-label-cloudy"><i class="fas fa-cloud"></i>&nbsp;Cloudy</div>';
+    var label;
     var labelNoprediction = '<div class="prediction-label prediction-label-noprediction"><i class="fas fa-question-circle"></i>&nbsp;Not predicted</div>';
     var prediction;
     var predictionResult;
@@ -138,12 +151,17 @@ async function getWebcamList() {
     {
       prediction = webcam.predictions[0];
       predictionResult = prediction.result;
+      confidence = roundOff(prediction.confidence * 100.0, 2);
+      timestamp = formatDateTimeStr(prediction.timestamp);
       if (predictionResult === 0) {
           // cloudy
-          label = `<div class="prediction-label prediction-label-cloudy"><i class="fas fa-cloud"></i>&nbsp;Cloudy, &nbsp;${prediction.timestamp}</div>`;
+          label = `<div class="prediction-label prediction-label-cloudy"><i class="fas fa-cloud"></i>&nbsp;Cloudy&nbsp;(${confidence}%),&nbsp;${timestamp}</div>`;
       } else if (predictionResult === 1) {
+          // rainy
+          label = `<div class="prediction-label prediction-label-rainy"><i class="fas fa-cloud-showers-heavy"></i>&nbsp;Rainy&nbsp;(${confidence}%),&nbsp;${timestamp}</div>`;
+      } else if (predictionResult === 2) {
           // sunny
-          label = `<div class="prediction-label prediction-label-sunny"><i class="fas fa-sun"></i>&nbsp;Sunny,&nbsp;${prediction.timestamp}</div>`;
+          label = `<div class="prediction-label prediction-label-sunny"><i class="fas fa-sun"></i>&nbsp;Sunny&nbsp;(${confidence}%),&nbsp;${timestamp}</div>`;
       } else {
           // unknown prediction type
           label = labelNoprediction;
@@ -246,6 +264,47 @@ async function getWebcamList() {
         alert(err);
     }
     return webcamlist;
+  }
+
+  function roundOff(num, places) 
+  {
+    const x = Math.pow(10,places);
+    return Math.round(num * x) / x;
+  }
+
+  function formatDateTimeStr(datetimeStr) {
+    var newDatetimeStr = "";
+    var dateTime = new Date(datetimeStr);
+
+    var fullYear = dateTime.getFullYear();
+    var month = dateTime.getMonth(); // month starts at 0
+    month ++;
+    var day = dateTime.getDate();
+    var hours = dateTime.getHours();
+    var minutes = dateTime.getMinutes();
+    var seconds = dateTime.getSeconds();
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+  
+    if (day < 10) {
+      day = '0' + day;
+    }
+    
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+    
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+    
+    if (seconds < 10) {
+      seconds = '0' + seconds;
+    }
+    newDatetimeStr = `${day}.${month}.${fullYear} ${hours}:${minutes}:${seconds}`;
+    return newDatetimeStr
   }
 
  loadWebcamList('webcamlist');

@@ -104,7 +104,7 @@ router.post('/download', function(req, res, next) {
 
 /* GET webcam map page. */
 router.get('/map', function(req, res, next) {
-  res.render('webcammap', { title: '☀︎ Sun spotter' });
+  res.render('webcammap', { title: '☀︎ SunSpotter' });
 });
 
 /* init webcam database */
@@ -175,9 +175,9 @@ router.get('/predictall', async function(req, res, next) {
   try {
     // call external python predict script
     predictscript = './predict/predict.py';
-    python = spawnSync('python', [predictscript]);
+    python = spawnSync('python3', [predictscript], { stdio: 'inherit' });
     if (python.status > 0) {
-      throw new Error(`Calling ${predictscript} failed with status: ${phyton.status}`);
+      throw new Error(`Calling ${predictscript} failed with status: ${python.status}`);
     }
     
     predictscriptoutput = uint8ArrayToString(python.stdout);

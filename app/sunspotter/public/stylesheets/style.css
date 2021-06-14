@@ -44,6 +44,13 @@ a {
   font-size: 20px;
 }
 
+.marker-icon-rainy {
+  background-color: rgb(214, 214, 214);
+  color: #4f4f4f;
+  border: 1px solid #000;
+  font-size: 20px;
+}
+
 .marker-icon-noprediction {
   background-color: rgb(63, 207, 255);
   color: #ff2525;
@@ -112,6 +119,11 @@ a {
 }
 
 .prediction-label-cloudy {
+  background-color: #e4e4e4;
+  color: rgb(89, 89, 89);
+}
+
+.prediction-label-rainy {
   background-color: #a5a5a5;
   color: #fff;
 }
