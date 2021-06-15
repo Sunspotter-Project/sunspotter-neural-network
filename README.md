@@ -12,17 +12,43 @@ This project is part of the ADS module in FS2021. It realises the use of machine
 
 ## Getting Started
 
-#### Start Sun spotter webapp
+#### Start Sun spotter webapp and TensorBoard
 
-```./app>docker-compose up```
+Specify in the docker-compose.yml for the volume where the webcam images should be downloaded a local disc path:
 
-or if you want to fore a rebuild of the container:
+```
+# all downloaded webcam images get stored in the ./sunspotter/downloads path
+#- ./app/sunspotter/downloads:/opt/sunspotter/downloads
+- "${pwd}/app/sunspotter/downloads":/opt/sunspotter/downloads
+```
 
-```./app>docker-compose up --build```
+Specify in the docker-compose.yml for the volume where the Tensorflow log files are a local disc path:
+
+```
+# Set your path to tensorflow logs
+#- ./code/jupyterNotebook/my_logs:/tf_logs
+- "${pwd}/code/jupyterNotebook/my_logs":/tf_logs
+```
+
+Start the sunspotter app and TensorBoard containers
+
+```./docker-compose up```
+
+or if you want to fore a rebuild of the containers:
+
+```./docker-compose up --build```
 
 Open the sun spotter app in your web browser
 
 ```http://localhost:3000/webcam/map```
+
+1. Scrape webcams: Scrape all webcams from foto-webcam.eu and initializes the database
+2. Geocode all webcams: Try to geocode the webcam positions with the webcam name (if the checkbox 'Use geocode services' is checked its done with the geocode service from the openrouteservice.org. Otherwise the positions are read from earlier file cached responses from this service.)
+3. Predict all webcams: Runs a weather prediction with Tensorflow for all webcams with their live image from the actual hour (takes some time ~5min)
+
+Open the TensorBoard in your web browser
+
+```http://localhost:6006/```
 
 ## Contributing
 ### Useful Commands
