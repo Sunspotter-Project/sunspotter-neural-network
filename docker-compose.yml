@@ -2,12 +2,11 @@ version: '3'
 
 services:
   sunspotter:
-    build: app/sunspotter
+    build: ./app/sunspotter
     ports:
     - "3000:3000"
     
     volumes:
-    # all downloaded webcam images get stored in the ./sunspotter/downloads path
     - ./app/sunspotter/downloads:/opt/sunspotter/downloads
 
   tensorboard:
@@ -17,7 +16,6 @@ services:
     - "6006:6006"
 
     volumes:
-    # Set your path to tensorflow logs
     - ./code/jupyterNotebook/my_logs:/tf_logs
 
     command:
