@@ -16,6 +16,10 @@ The following graphic shows the parts of sun spotter application:
 ![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/sunspotter-tech-integration.png)
 
 
+## Jupyter Notebooks
+* Own CNN-Model with classifier see file: [ownCNNClassificationSunSpotter.ipynb](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/code/jupyterNotebook/ownCNNClassificationSunSpotter.ipynb)
+* Transer-Learning attempt with pretrained CNN-Model see file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
+
 ## Getting Started
 
 #### Start Sun spotter webapp and TensorBoard
