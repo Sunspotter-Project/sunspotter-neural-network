@@ -106,4 +106,4 @@ for webcamrow in webcamrows.fetchall():
 # save all database changes
 con.commit()
 con.close()
-print(pkprediction + " predictions were made")
+print(str(pkprediction) + " predictions were made")

@@ -19,10 +19,9 @@ COPY . .
 RUN apt-get update
 RUN apt-get install python3 python3-pip -y
 RUN pip3 install --upgrade pip
-RUN pip3 install requests pysqlite3 numpy pillow
-#RUN pip3 install "tensorflow>=1.15,<2.0"
-RUN pip3 install "tensorflow>=2.0"
-RUN pip3 install --upgrade tensorflow-hub
+RUN pip3 install requests pysqlite3 numpy pillow "tensorflow>=2.0" --upgrade tensorflow-hub
+#RUN pip3 install "tensorflow>=2.0"
+#RUN pip3 install --upgrade tensorflow-hub
 
 EXPOSE 3000
 CMD [ "npm", "start", "app.js" ]
