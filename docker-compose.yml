@@ -8,8 +8,7 @@ services:
     
     volumes:
     # all downloaded webcam images get stored in the ./sunspotter/downloads path
-    #- ./app/sunspotter/downloads:/opt/sunspotter/downloads
-    - "${pwd}/app/sunspotter/downloads":/opt/sunspotter/downloads
+    - ./app/sunspotter/downloads:/opt/sunspotter/downloads
 
   tensorboard:
     image: tensorflow/tensorflow:latest-gpu
@@ -19,8 +18,7 @@ services:
 
     volumes:
     # Set your path to tensorflow logs
-    #- ./code/jupyterNotebook/my_logs:/tf_logs
-    - "${pwd}/code/jupyterNotebook/my_logs":/tf_logs
+    - ./code/jupyterNotebook/my_logs:/tf_logs
 
     command:
       tensorboard --logdir tf_logs/ --bind_all
