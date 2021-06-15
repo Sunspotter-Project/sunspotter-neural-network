@@ -73,8 +73,12 @@ for webcamrow in webcamrows.fetchall():
     downloadurl = urlTemplate.format(webcamid)
     print("Download: " + downloadurl)
     if downloadImage:
-        response = requests.get(downloadurl)
-        status_code = response.status_code
+        try:
+            response = requests.get(downloadurl)
+            status_code = response.status_code
+        except:
+            print("Failed to download image from: " + downloadurl)
+            status_code = 404
     else:
         status_code = 200
     if status_code == 200:
