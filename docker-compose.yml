@@ -2,7 +2,7 @@ version: '3'
 
 services:
   sunspotter:
-    build: ./app/sunspotter
+    build: app/sunspotter
     ports:
     - "3000:3000"
     
