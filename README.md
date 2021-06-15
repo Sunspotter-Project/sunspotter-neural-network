@@ -44,7 +44,7 @@ or if you want to fore a rebuild of the containers:
 
 ```./docker-compose up --build```
 
-Open the sun spotter app in your web browser
+#### Open the sun spotter app in your web browser
 
 ```http://localhost:3000/webcam/map```
 
@@ -54,7 +54,7 @@ Open the sun spotter app in your web browser
 2. Geocode all webcams: Try to geocode the webcam positions with the webcam name (if the checkbox 'Use geocode services' is checked its done with the geocode service from the openrouteservice.org. Otherwise the positions are read from earlier file cached responses from this service.)
 3. Predict all webcams: Runs a weather prediction with Tensorflow for all webcams with their live image from the actual hour (takes some time ~5min)
 
-Open the TensorBoard in your web browser
+#### Open the TensorBoard in your web browser
 
 ```http://localhost:6006/```
 
