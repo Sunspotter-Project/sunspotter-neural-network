@@ -25,6 +25,9 @@ block content
         .actionElement
           block btnPredictAll
             button(class='btnActionPredictAllWebcams', onclick='predictAllWebcams()') 3. Predict all webcams
+        .actionElement
+          block btnTensorflowboard
+            a(class='btnOpenTensorflowboard', href='http://localhost:6006/', target='_blank') Open Tensorflow board
   .webcamoverview
     block content
     #webcamlist

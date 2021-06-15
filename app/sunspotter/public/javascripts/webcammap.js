@@ -307,4 +307,9 @@ async function getWebcamList() {
     return newDatetimeStr
   }
 
+  function openTensorflowBoard() {
+    var url = "localhost:6006"
+    window.open(url, '_blank');
+  }
+
  loadWebcamList('webcamlist');
