@@ -20,22 +20,6 @@ The following graphic shows the parts of sun spotter application:
 
 #### Start Sun spotter webapp and TensorBoard
 
-Specify in the docker-compose.yml for the volume where the webcam images should be downloaded a local disc path:
-
-```
-# all downloaded webcam images get stored in the ./sunspotter/downloads path
-#- ./app/sunspotter/downloads:/opt/sunspotter/downloads
-- "${pwd}/app/sunspotter/downloads":/opt/sunspotter/downloads
-```
-
-Specify in the docker-compose.yml for the volume where the Tensorflow log files are a local disc path:
-
-```
-# Set your path to tensorflow logs
-#- ./code/jupyterNotebook/my_logs:/tf_logs
-- "${pwd}/code/jupyterNotebook/my_logs":/tf_logs
-```
-
 Start the sunspotter app and TensorBoard containers
 
 ```./docker-compose up```
