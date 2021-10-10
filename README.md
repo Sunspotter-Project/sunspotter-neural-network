@@ -2,7 +2,7 @@
 :cloud_with_rain: :partly_sunny: :sunny: :heartpulse:
 
 Projektarbeit für das Modul angewandte Forschung und Entwicklung von Martina Buchmeier, Matthias Christen und Marion Mürner.
-Betreut durch Dr. Elena Gavarin
+Betreut durch Dr. Elena Gavagnin
 
 ## About the Project
 
