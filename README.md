@@ -1,7 +1,8 @@
-# SunSpotter - Projektarbeit ADS FS2021 
+# SunSpotter - Projektarbeit aF&E HS2021 
 :cloud_with_rain: :partly_sunny: :sunny: :heartpulse:
 
-Projektarbeit für das Modul Applied Data Science von Claudio Hauser, Matthias Christen und Marion Mürner
+Projektarbeit für das Modul angewandte Forschung und Entwicklung von Martina Buchmeier, Matthias Christen und Marion Mürner.
+Betreut durch Dr. Elena Gavarin
 
 ## About the Project
 
