@@ -107,6 +107,11 @@ router.get('/map', function(req, res, next) {
   res.render('webcammap', { title: '☀︎ SunSpotter' });
 });
 
+/* GET webcam map page. */
+router.get('/windy', function(req, res, next) {
+  res.render('webcam-windy', { title: 'Download webcam images from Windy.com', downloadurl: './search-windy' });
+});
+
 /* init webcam database */
 router.get('/init', async function(req, res, next) {
   var webcamlist;
