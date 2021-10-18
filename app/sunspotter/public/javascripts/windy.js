@@ -52,7 +52,7 @@ async function getWebcamList(country, limit, offset) {
                 webcamlist.push(fetchedWebcams[i]);
             }
             currentWebcamOffset += windyMaxWebcamLimit;
-        } while ((fetchedWebcams.length >= windyMaxWebcamLimit) && (maxwebcams < webcamlist.length))
+        } while ((fetchedWebcams.length >= windyMaxWebcamLimit) && (webcamlist.length < maxwebcams))
         
         renderWebcamList(webcamlistElId, webcamlist);
     } catch (err) {
