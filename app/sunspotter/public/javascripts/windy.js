@@ -191,15 +191,19 @@ function setAllWebcamSelect(check) {
     }
 }
 
-function scrapeSelected() {
+async function scrapeSelected() {
     var webcamSelect;
+
+    setStatusLabel("Scraping images...");
     const webcamSelects = document.getElementsByClassName('webcam-select');
     for (var i = 0; i < webcamSelects.length; i++) {
         webcamSelect = webcamSelects[i];
         if(webcamSelect.checked) {
-            fetchPlayerImages(webcamSelect.id);
+            await fetchPlayerImages(webcamSelect.id);
         }
     }
+    setStatusLabel("");
+    alert("Images scraped");
 }
 
 function findWebcamMarkerByWebcamId(webcamId) {
@@ -237,8 +241,11 @@ async function saveScraped() {
     var webcamPlayerImages;
     var stream;
     const directoryHandle = await window.showDirectoryPicker({startIn: 'downloads'});
+    var webcamDirectoryHandle;
     const options = {};
     options.mode = 'readwrite';
+    
+
     
 
     // Check if permission was already granted. If so, return true.
@@ -248,20 +255,39 @@ async function saveScraped() {
     }
     
     if (hasPermission) {
-        statusLabel = document.getElementById("statusLabel");
-        statusLabel.innerHTML = "Saving images...";
+        setStatusLabel("Saving images...");
         webcamPlayerImages = document.getElementsByClassName('webcam-playerimage-img');
         for (var i = 0; i < webcamPlayerImages.length; i++) {
             webcamPlayerImage = webcamPlayerImages[i];
             filename = webcamPlayerImage.id;
-            imgdata = webcamPlayerImage.blob;
-            newFileHandle = await directoryHandle.getFileHandle(filename, { create: true });
-            stream = await newFileHandle.createWritable();
-            await stream.write(imgdata);
-            await stream.close();
+            if (filename.indexOf('@')> -1) {
+                directory = getWebcamId(filename);
+                imgdata = webcamPlayerImage.blob;
+                try {
+                    webcamDirectoryHandle = await directoryHandle.getDirectoryHandle(directory, { create: true });
+                    newFileHandle = await webcamDirectoryHandle.getFileHandle(filename, { create: true });
+                    stream = await newFileHandle.createWritable();
+                    await stream.write(imgdata);
+                    await stream.close();
+                } catch (err) {
+                    console.error(err);
+                }   
+            }
         }
-        statusLabel.innerHTML = "";
+        setStatusLabel("");
         alert("Images successfully saved.");
+    }
+}
+
+function getWebcamId(webcamPlayerImageFileName) {
+    var webcamId = webcamPlayerImageFileName.substring(0, webcamPlayerImageFileName.indexOf('@'));
+    return webcamId;
+}
+
+function setStatusLabel(text) {
+    var statusLabel = document.getElementById("statusLabel");
+    if (statusLabel !== null) {
+        statusLabel.innerHTML = text;
     }
 }
 
