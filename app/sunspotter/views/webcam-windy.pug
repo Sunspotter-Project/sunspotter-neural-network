@@ -3,44 +3,60 @@ extends layout
 block append head
   link(rel='stylesheet', href='/javascripts/leaflet/leaflet.css')
   link(rel='stylesheet', href='/stylesheets/fontawesome/css/all.css')
-  script(src='/javascripts/windy.js')
+  link(rel='stylesheet', href='/stylesheets/webcam-windy.css')
+  script(src='/javascripts/leaflet/leaflet.js')
+  
 
 block content
-  h1= title
-  
-  label(for='countrycode') Webcams of country:
-  |
-  |
-  select(name='countrycode' id='countrycode')
-    option(value='CH') Switzerland
-    option(value='IT') Italy
-    option(value='DE') Germany
-    option(value='AT') Austria
-  br
-  br
-  label(for='maxwebcams') Max webcams:
-  |
-  |
-  input(type='number' id='maxwebcams' name='maxwebcams' value='50')
-  br
-  br
-  label(for='timeinterval') Windy time interval:
-  |
-  |
-  select(name='timeinterval' id='timeinterval')
-    option(value='day') Day
-    option(value='month') Month
-    option(value='year') Year
-    option(value='lifetime') Lifetime
-  br
-  br
-  button(onclick='loadWebcamList("webcamlist")') Find webcams
-  block content
-      #webcamlist
-        block webcamlist
-          p nothing
-      #webcammap
-      block webcammap(class='webcammap')
-          p nothing
-  
-  a(href='./map') Webcam map
+  .controls
+    block controls
+      h1= title
+      label(for='countrycode') Webcams of country:
+      |
+      |
+      select(name='countrycode' id='countrycode')
+        option(value='CH') Switzerland
+        option(value='IT') Italy
+        option(value='DE') Germany
+        option(value='AT') Austria
+      br
+      br
+      label(for='maxwebcams') Max webcams:
+      |
+      |
+      input(type='number' id='maxwebcams' name='maxwebcams' value='50')
+      br
+      br
+      button(onclick='loadWebcamList("webcamlist")') Find webcams
+  #webcammap
+    block webcammap(class='webcammap')
+  #webcamlist-controls 
+    block webcamlist-controls(class='webcamlist-controls')
+      button(onclick='setAllWebcamSelect(true)') Select all
+      |
+      |
+      button(onclick='setAllWebcamSelect(false)') Deselect all
+      |
+      |
+      label(for='timeinterval') Windy time interval:
+      |
+      |
+      select(name='timeinterval' id='timeinterval')
+        option(value='day') Day
+        option(value='month') Month
+        option(value='year') Year
+        option(value='lifetime' selected) Lifetime
+      |
+      |
+      button(onclick='scrapeSelected(false)') Scrape selected
+      |
+      |
+      button#btnOpenFile(onclick='saveScraped()') Save scraped
+      |
+      |
+      label#statusLabel
+  #webcamlist
+    block webcamlist(class='webcamlist')
+
+  block scripts
+    script(src='/javascripts/windy.js')
