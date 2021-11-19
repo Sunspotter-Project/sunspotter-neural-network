@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Sunspotter" company="ZHAW aF+E" webLink="http://" view-date="2021-09-26" view-index="0" gantt-divider-location="857" resource-divider-location="300" version="2.8.11" locale="en_US">
-    <description/>
+<?xml version="1.0" encoding="UTF-8"?><project name="Sunspotter" company="ZHAW aF+E" webLink="https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter.git" view-date="2021-09-26" view-index="0" gantt-divider-location="485" resource-divider-location="300" version="2.8.11" locale="en_US">
+    <description><![CDATA[Sunspotter aF+E Projekt HS2021]]></description>
     <view zooming-state="default:5" id="gantt-chart">
-        <field id="tpd3" name="Name" width="653" order="0"/>
-        <field id="tpd4" name="Begin date" width="67" order="2"/>
-        <field id="tpd5" name="End date" width="73" order="1"/>
-        <field id="tpd6" name="Duration" width="60" order="3"/>
+        <field id="tpd3" name="Name" width="342" order="0"/>
+        <field id="tpd5" name="End date" width="45" order="1"/>
+        <field id="tpd4" name="Begin date" width="41" order="2"/>
+        <field id="tpd6" name="Duration" width="38" order="3"/>
         <option id="color.recent"><![CDATA[#00cccc #cccccc #000000 #ff6666 #66ccff #ffcc33 #00cc66 #009966 #999999]]></option>
     </view>
     <view id="resource-table">
@@ -41,8 +41,8 @@
             <task id="66" name="Github-Repository erstellen" color="#00cccc" meeting="false" start="2021-10-11" duration="1" complete="100" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
             <task id="67" name="Issue-Tracking-System verwenden/evaluieren" color="#00cccc" meeting="false" start="2021-10-11" duration="1" complete="100" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="0" name="Produktdesign UserXperience" color="#00cc66" meeting="false" start="2021-10-12" duration="22" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
-            <task id="16" name="Evaluation Datenquellen für Webcambilder" color="#00cc66" meeting="false" start="2021-10-12" duration="1" complete="0" thirdDate="2021-10-12" thirdDate-constraint="0" expand="true">
+        <task id="0" name="Produktdesign UserXperience" color="#00cc66" meeting="false" start="2021-10-12" duration="22" complete="6" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="16" name="Evaluation Datenquellen für Webcambilder" color="#00cc66" meeting="false" start="2021-10-12" duration="1" complete="100" thirdDate="2021-10-12" thirdDate-constraint="0" expand="true">
                 <depend id="27" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="14" name="Copy-Right-Abklärungen mit den &quot;angezapften&quot; Datenquellen (bspw. https://www.foto-webcam.eu/)" color="#00cc66" meeting="false" start="2021-10-12" duration="1" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
@@ -66,18 +66,20 @@
             </task>
             <task id="88" name="Vertriebsmöglichkeiten abklären Schweiz Tourismus (Zielgruppenanalyse?)" color="#00cc66" meeting="false" start="2021-11-16" duration="2" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="18" name="Client-Web-Anwendung" color="#66ccff" meeting="false" start="2021-10-11" duration="28" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+        <task id="18" name="Client-Web-Anwendung" color="#66ccff" meeting="false" start="2021-10-11" duration="28" complete="15" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
             <task id="19" name="Entwicklung Browser-User-Interface (Mobile, Desktop) (mit GoolgeMaps, Open-Street-Map o.ä.)" color="#66ccff" meeting="false" start="2021-11-06" duration="8" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
-            <task id="23" name="Evaluation API's für Geolocation /Geotagging (Lat./Lang. und Altitude)" color="#66ccff" meeting="false" start="2021-10-11" duration="1" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="23" name="Evaluation API's für Geolocation /Geotagging (Lat./Lang. und Altitude)" color="#66ccff" meeting="false" start="2021-10-11" duration="1" complete="50" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="24" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="24" name="Einbinden von API für Geoloaction" color="#66ccff" meeting="false" start="2021-10-12" duration="2" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
+            <task id="24" name="Einbinden von API für Geoloaction" color="#66ccff" meeting="false" start="2021-10-12" duration="2" complete="100" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
             <task id="27" name="Abfrage aktuelle Webcam-Bilder" color="#66ccff" meeting="false" start="2021-10-16" duration="3" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="29" type="2" difference="0" hardness="Strong"/>
                 <depend id="40" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="29" name="Geolocating/Geotagging für verwendete Webcam Bilder" color="#66ccff" meeting="false" start="2021-10-19" duration="2" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
-            <task id="31" name="Scraping/Beschaffung zusätzliche Parameter zu Koordinate (Temperatur, Höhe, etc.)" color="#66ccff" meeting="false" start="2021-10-23" duration="2" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="29" name="Geolocating/Geotagging für verwendete Webcam Bilder" color="#66ccff" meeting="false" start="2021-10-19" duration="2" complete="40" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+                <notes><![CDATA[Altitudei is missing]]></notes>
+            </task>
+            <task id="31" name="Scraping/Beschaffung zusätzliche Parameter zu Koordinate (Temperatur, Höhe, etc.)" color="#66ccff" meeting="false" start="2021-10-23" duration="2" complete="50" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="51" type="2" difference="0" hardness="Strong"/>
                 <depend id="53" type="2" difference="0" hardness="Strong"/>
                 <depend id="93" type="2" difference="0" hardness="Strong"/>
@@ -93,11 +95,11 @@
             <task id="38" name="Datenbankanbindung (jetzt sqlite), evtl. PostgreSQL" color="#66ccff" meeting="false" start="2021-11-01" duration="1" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
             <task id="98" name="Einbindung Wanderrouten, SBB-Fahrplan" color="#66ccff" meeting="false" start="2021-11-14" duration="1" complete="0" thirdDate="2021-09-26" thirdDate-constraint="0" expand="true"/>
         </task>
-        <task id="39" name="Machine-Learning-Algorithmus" color="#ffcc33" meeting="false" start="2021-10-11" duration="23" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
-            <task id="40" name="&quot;Daten-Scraper - Repräsentative Webcam-Daten für Training scrapen (in allen 3 Kategorien gelichverteilt)  ~2000  (eigener Scraper, Selenium, WebcamGet)&quot;" color="#ffcc33" meeting="false" start="2021-10-19" duration="3" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+        <task id="39" name="Machine-Learning-Algorithmus" color="#ffcc33" meeting="false" start="2021-10-11" duration="23" complete="28" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="40" name="&quot;Daten-Scraper - Repräsentative Webcam-Daten für Training scrapen (in allen 3 Kategorien gelichverteilt)  ~2000  (eigener Scraper, Selenium, WebcamGet)&quot;" color="#ffcc33" meeting="false" start="2021-10-19" duration="3" complete="100" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="42" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="42" name="Trainingsdaten kategorisieren (Sonnig, Bewölkt, Regen)" color="#ffcc33" meeting="false" start="2021-10-25" duration="1" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="42" name="Trainingsdaten kategorisieren (Sonnig, NIcht sonnig)" color="#ffcc33" meeting="false" start="2021-10-25" duration="1" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="51" type="2" difference="0" hardness="Strong"/>
                 <depend id="93" type="2" difference="0" hardness="Strong"/>
             </task>
@@ -107,9 +109,9 @@
             <task id="93" name="Einige Webcams gescrapet &amp; zusätzlich Parameter (Höhe, Temp. usw.) verfügbar, Daten kategoriesiert" color="#000000" meeting="true" start="2021-10-26" duration="0" complete="0" thirdDate="2021-09-26" thirdDate-constraint="0" expand="true">
                 <depend id="51" type="2" difference="0" hardness="Strong"/>
             </task>
-            <task id="44" name="Bestehendes ML-Modell (Bildklassifizierung mit Convolutional Neural Network CNN) verbessern (fine tuning von ConvNet) oder neues Modell erstellen" color="#ffcc33" meeting="false" start="2021-10-11" duration="14" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
+            <task id="44" name="Bestehendes ML-Modell (Bildklassifizierung mit Convolutional Neural Network CNN) verbessern (fine tuning von ConvNet) oder neues Modell erstellen" color="#ffcc33" meeting="false" start="2021-10-11" duration="14" complete="37" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                 <depend id="43" type="2" difference="0" hardness="Strong"/>
-                <task id="46" name="Confusion-Matrix als Metrik verwenden, nicht nur accurracy" color="#ffcc33" meeting="false" start="2021-10-11" duration="3" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
+                <task id="46" name="Confusion-Matrix als Metrik verwenden, nicht nur accurracy" color="#ffcc33" meeting="false" start="2021-10-11" duration="3" complete="100" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true"/>
                 <task id="51" name="Transfer Learning --&gt; Evaluation pretrained Model (welches ist das beste für uns) und fine tuning machen" color="#ffcc33" meeting="false" start="2021-10-26" duration="2" complete="0" thirdDate="2021-10-11" thirdDate-constraint="0" expand="true">
                     <depend id="53" type="2" difference="0" hardness="Strong"/>
                 </task>
