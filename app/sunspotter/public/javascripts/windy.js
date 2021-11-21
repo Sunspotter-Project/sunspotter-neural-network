@@ -3,6 +3,7 @@ const windyApiKey = 'rNS6hnYbsGyVFgu4waxyMmaQW3KfMTpb';
 const windyListCountry = 'list/country=';
 var windyMaxWebcamLimit = 50;
 var webcamMarkers = [];
+var loadedwebcamlist = [];
 const mapCenter = [46.8527,9.5306]; // Chur (CH)
 var map = L.map('webcammap').setView(mapCenter, 7);
 
@@ -47,7 +48,7 @@ async function getWebcamList(country, limit, offset) {
     var currentWebcamOffset = 0;
     var fetchedWebcams = [];
     var webcamlist = [];
-  
+    loadedwebcamlist = [];
     try {
         // get selected country code
         var sel = document.getElementById("countrycode");
@@ -67,7 +68,7 @@ async function getWebcamList(country, limit, offset) {
             }
             currentWebcamOffset += windyMaxWebcamLimit;
         } while ((fetchedWebcams.length >= windyMaxWebcamLimit) && (webcamlist.length < maxwebcams))
-        
+        loadedwebcamlist = webcamlist;
         renderWebcamList(webcamlistElId, webcamlist);
     } catch (err) {
         console.error(err);
@@ -234,7 +235,6 @@ function findWebcamMarkerByWebcamId(webcamId) {
 
 async function saveScraped() {
     var webcamPlayerImage;
-    var statusLabel;
     var filename;
     var hasPermission;
     var newFileHandle;
@@ -244,9 +244,6 @@ async function saveScraped() {
     var webcamDirectoryHandle;
     const options = {};
     options.mode = 'readwrite';
-    
-
-    
 
     // Check if permission was already granted. If so, return true.
     hasPermission = (await directoryHandle.queryPermission(options) === 'granted'); 
@@ -277,6 +274,85 @@ async function saveScraped() {
         setStatusLabel("");
         alert("Images successfully saved.");
     }
+}
+
+async function createSeedFile() {
+    var webcam;
+    var webcamSeed;
+    var webcamSeeds = [];
+    var filename;
+    var filedata;
+    var hasPermission;
+    var newFileHandle;
+    var stream;
+    const directoryHandle = await window.showDirectoryPicker({startIn: 'downloads'});
+    const options = {};
+    options.mode = 'readwrite';
+
+    // Check if permission was already granted. If so, return true.
+    hasPermission = (await directoryHandle.queryPermission(options) === 'granted'); 
+    if (!hasPermission) {
+        hasPermission = (await directoryHandle.requestPermission(options) === 'granted');
+    }
+    
+    if (hasPermission) {
+        setStatusLabel("Create webcam seed file...");
+        for (var i = 0; i < loadedwebcamlist.length; i++) {
+            webcam = loadedwebcamlist[i];
+            webcamSeed = getWebcamSeed(webcam);
+            webcamSeeds.push(webcamSeed);
+        }
+        filename = 'webcam-seed-file.json';
+        filedata = JSON.stringify(webcamSeeds);
+        try {
+            newFileHandle = await directoryHandle.getFileHandle(filename, { create: true });
+            stream = await newFileHandle.createWritable();
+            await stream.write(filedata);
+            await stream.close();
+        } catch (err) {
+            console.error(err);
+        }   
+    
+        setStatusLabel("");
+        alert("Webcam seed file successfully created.");
+    }
+}
+
+function getWebcamSeed(webcam) {
+    
+    /* Note: In the output file replace > with 
+        "new Date()" > new Date()
+        "uuidv4()" > uuidv4()
+        ","city" > ,"city"
+        "Sequelize.fn > Sequelize.fn
+    */
+
+    const locationPoint = {
+        type: 'Point',
+        coordinates: [webcam.location.latitude, webcam.location.longitude],
+        crs: { type: 'name', properties: { name: 'EPSG:4326'} }
+    };
+
+    var locationContent = 'Sequelize.fn(\'ST_GeomFromGeoJSON\', \'' + JSON.stringify(locationPoint) + '\')';
+    
+    const webcamSeed = { 
+        PKWebcam : `uuidv4()`,
+        webcamid : webcam.id,
+        imgurlLowRes: webcam.image.current.icon,
+        imgurlMedRes : webcam.image.current.thumbnail,
+        imgurlHighRes : webcam.image.current.preview,
+        title : webcam.title,
+        location : locationContent,
+        city: webcam.location.city,
+        country: webcam.location.country,
+        countryCode: webcam.location.country_code,
+        region: webcam.location.region,
+        regionCode: webcam.location.region_code,
+        status: webcam.status,
+        updatedAt: `new Date()`,
+        createdAt: `new Date()`
+    }
+    return webcamSeed;
 }
 
 function getWebcamId(webcamPlayerImageFileName) {

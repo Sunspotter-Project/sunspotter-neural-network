@@ -1,17 +1,34 @@
-var createError = require('http-errors');
-var express = require('express');
-var sqlite = require("./db/aa-sqlite");
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import { Database } from './db/db.mjs';
+import createError from 'http-errors';
+import express from 'express';
+//import sqlite from './db/aa-sqlite.mjs';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import logger from 'morgan';
 
+import indexRouter from './routes/index.mjs';
+import usersRouter from './routes/users.mjs';
+import webcamRouter from './routes/webcam.mjs';
+
+
+/*
 var dbfile = './db/webcam.db';
-
 sqlite.open(dbfile).catch(function(err) { console.error(err + ', DB file: ' + dbfile); });
+*/
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var webcamRouter = require('./routes/webcam');
+// initialize database
+const dbname = "sunspotter"; // process.env.DBNAME;
+const dbusername = "postgres"; // process.env.DBUSERNAME;
+const dbpassword = "GVHb52QJBu5Ih9BoQzKY"; // process.env.DBPASSWORD;
+
+try {
+  await new Database(dbname, dbusername, dbpassword);
+  console.log('Database connection has been established successfully.');
+} catch (error) {
+  console.error(`Unable to connect to the database ${dbname} with ${dbusername}:`, error);
+}
+
+var __dirname = path.resolve();
 
 var app = express();
 
@@ -45,4 +62,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+export default app;

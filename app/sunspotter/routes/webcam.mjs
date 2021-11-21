@@ -1,11 +1,11 @@
-var express = require('express');
-var fs = require('fs');
-var fetch = require('node-fetch');
-var dbwebcam = require('../db/webcam');
-var dbprediction = require('../db/prediction');
-var jsdom = require("jsdom");
-var {spawnSync} = require('child_process');
-var { JSDOM } = jsdom;
+import express from 'express';
+import fs from 'fs';
+import fetch from 'node-fetch';
+import dbwebcam from '../db/webcam.mjs';
+import dbprediction from '../db/prediction.mjs';
+import jsdom from 'jsdom';
+import spawnSync from 'child_process';
+import JSDOM from 'jsdom';
 
 var router = express.Router();
 
@@ -469,4 +469,4 @@ async function getWebcamListFromCache() {
 
 
 
-module.exports = router;
+export default router;

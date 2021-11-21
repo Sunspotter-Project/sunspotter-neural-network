@@ -1,4 +1,4 @@
-const sqlite = require("./aa-sqlite");
+import sqlite from './aa-sqlite.mjs';
 
 var prediction = function() {};
 prediction.tablename = 'prediction';
@@ -43,5 +43,4 @@ prediction.getAll = async function() {
     return r;
 }
 
-
-module.exports = prediction;
+export default prediction;
