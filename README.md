@@ -8,7 +8,7 @@ Supervised by Dr. Elena Gavagnin.
 
 This project inlcudes a web application through which sunny places can be found. The sunny locations are displayed via an image of a cam. In the background of the application a ML algorithm is used to decide which cameras are selected. The alogrithm is trained with scraped webcam images and is used to check the current webcam images. 
 
-![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/sunspotter-app.png)
+![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/mockup.JPG)
 
 ## System architecture
 
