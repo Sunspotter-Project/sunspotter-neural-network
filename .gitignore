@@ -105,3 +105,5 @@ dist
 
 app/sunspotter/downloads
 app/sunspotter/public/images/predicted
+data/
+testdata/
