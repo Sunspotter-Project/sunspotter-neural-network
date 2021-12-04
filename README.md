@@ -1,14 +1,14 @@
-# SunSpotter - Projektarbeit aF&E HS2021 
-:cloud_with_rain: :partly_sunny: :sunny: :heartpulse:
+# SunSpotter - Project work aF&E HS2021 
+🕶️(:cloud_with_rain: + :sunny:) = :heartpulse:
 
-Projektarbeit für das Modul angewandte Forschung und Entwicklung von Martina Buchmeier, Matthias Christen und Marion Mürner.
-Betreut durch Dr. Elena Gavagnin
+Projectwork for the modul applied research and development from Martina Buchmeier, Matthias Christen and Marion Mürner.
+Supervised by Dr. Elena Gavagnin.
 
 ## About the Project
 
-This project is part of the ADS module in FS2021. It realises the use of machine learning in the context of webcam images to predict whether a webcam image shows good or bad weather.
+This project inlcudes a web application through which sunny places can be found. The sunny locations are displayed via an image of a cam. In the background of the application a ML algorithm is used to decide which cameras are selected. The alogrithm is trained with scraped webcam images and is used to check the current webcam images. 
 
-![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/sunspotter-app.png)
+![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/mockup.JPG)
 
 ## System architecture
 
@@ -39,7 +39,7 @@ or if you want to fore a rebuild of the containers:
 
 ##### Functionalities
 
-1. Scrape webcams: Scrape all webcams from foto-webcam.eu and initializes the database
+1. Scrape webcams: Scrape random webcams from windy.com and initializes the database
 2. Geocode all webcams: Try to geocode the webcam positions with the webcam name (if the checkbox 'Use geocode services' is checked its done with the geocode service from the openrouteservice.org. Otherwise the positions are read from earlier file cached responses from this service.)
 3. Predict all webcams: Runs a weather prediction with Tensorflow for all webcams with their live image from the actual hour (takes some time ~5min)
 

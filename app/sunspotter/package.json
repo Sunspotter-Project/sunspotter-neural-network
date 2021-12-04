@@ -2,6 +2,7 @@
   "name": "sunspotter",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -14,7 +15,16 @@
     "jsdom": "^16.6.0",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.1",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
     "pug": "2.0.0-beta11",
-    "sqlite3": "^5.0.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sequelize": "^6.12.0-alpha.1",
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.3.0"
   }
 }

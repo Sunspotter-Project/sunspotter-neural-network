@@ -1,9 +1,7 @@
-const sqlite3 = require('sqlite3').verbose()
+import sqlite3 from 'sqlite3'
 var db
 
-exports.db = db;
-
-exports.open=function(path) {
+function open(path) {
     return new Promise(function(resolve, reject) {
     this.db = new sqlite3.Database(path, 
         function(err) {
@@ -15,7 +13,7 @@ exports.open=function(path) {
 }
 
 // any query: insert/delete/update
-exports.run=function(query) {
+function run(query) {
     return new Promise(function(resolve, reject) {
         this.db.run(query, 
             function(err)  {
@@ -26,7 +24,7 @@ exports.run=function(query) {
 }
 
 // first row read
-exports.get=function(query, params) {
+function get(query, params) {
     return new Promise(function(resolve, reject) {
         this.db.get(query, params, function(err, row)  {
             if(err) reject("Read error: " + err.message)
@@ -38,7 +36,7 @@ exports.get=function(query, params) {
 }
 
 // set of rows read
-exports.all=function(query, params) {
+function all(query, params) {
     return new Promise(function(resolve, reject) {
         if(params == undefined) params=[]
 
@@ -52,7 +50,7 @@ exports.all=function(query, params) {
 }
 
 // each row returned one by one 
-exports.each=function(query, params, action) {
+function each(query, params, action) {
     return new Promise(function(resolve, reject) {
         var db = this.db
         db.serialize(function() {
@@ -71,9 +69,12 @@ exports.each=function(query, params, action) {
     }) 
 }
 
-exports.close=function() {
+function close() {
     return new Promise(function(resolve, reject) {
         this.db.close()
         resolve(true)
     }) 
 }
+
+export default db;
+export { open, run, get, all, each, close};

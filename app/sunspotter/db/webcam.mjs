@@ -1,4 +1,4 @@
-const sqlite = require("./aa-sqlite");
+import sqlite from './aa-sqlite.mjs';
 
 var webcam = function() {};
 webcam.tablename = 'webcam';
@@ -40,4 +40,4 @@ webcam.updateLatLong = async function(id, lat, long) {
     if(r) console.log(`${this.tablename} entry updated with lat,long: ${id}, Lat:${lat}, Long:${long}`);
 }
 
-module.exports = webcam;
+export default webcam;
