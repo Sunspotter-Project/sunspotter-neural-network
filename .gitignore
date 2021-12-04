@@ -108,3 +108,5 @@ app/sunspotter/public/images/predicted
 data/
 testdata/
 app/db/data
+code/mylogs
+code/tmp
