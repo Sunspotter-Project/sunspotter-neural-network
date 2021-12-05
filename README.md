@@ -11,14 +11,14 @@ This project inlcudes a web application through which sunny places can be found.
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/mockup.JPG)
 
 Here you can get a glimps of the real web interface
-![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/LandingPageSunSpotter.png)
+![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/LandingPageSunSpotter.png)
 
 ## System architecture
 
 The following graphic shows the parts of sun spotter application:
 
 🚧 under construction...
-![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/sunspotter-tech-integration.png)
+![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/sunspotter-tech-integration.png)
 
 
 ## Jupyter Notebooks
