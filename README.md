@@ -5,7 +5,7 @@ Projectwork for the modul applied research and development from Martina Buchmeie
 Supervised by Dr. Elena Gavagnin.
 
 _Open SunSpotter application in you web browser_
-🔗 http://sunspotter.ch:8443/
+🔗 http://sunspotter.ch/
 
 
 ## About the Project
