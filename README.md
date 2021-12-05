@@ -17,6 +17,26 @@ This project inlcudes a web application through which sunny places can be found.
 Here you can get a glimps of the real web interface
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/LandingPageSunSpotter.png)
 
+## Repository structure
+
+
+
+Most important folders: 
+
+| Folder   | Description | Branch |
+|----------|:-------------|----------|
+| [app](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/react/app) |  contains the web application and the webcam scraper | react |
+| [code/jupyterNotebook](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/code/jupyterNotebook) | contains the jupyternotebooksfor the model and exports of trained models | main |
+| [planning](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/planning) | contains the gant chart of the project | main |
+  
+The current reporistory is the _main_ repository. It contains the documentation and the python code for the model. The code for the webclient will be mooved to two seperate repositories for a better overview (but is not yet): 
+* [This repository contains the source of the sunspotter app (backend and frontend)](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)
+* [This repository contains configs and scripts to run the sunspotter infrastructure](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-infra)
+
+
+## Branching
+...
+
 ## System architecture
 
 The following graphic shows the parts of sun spotter application:
