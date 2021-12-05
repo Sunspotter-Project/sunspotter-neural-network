@@ -10,21 +10,25 @@ This project inlcudes a web application through which sunny places can be found.
 
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/mockup.JPG)
 
+Here you can get a glimps of the real web interface
+![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/LandingPageSunSpotter.png)
+
 ## System architecture
 
 The following graphic shows the parts of sun spotter application:
 
+🚧 under construction...
 ![image](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/drawings/sunspotter-tech-integration.png)
 
 
 ## Jupyter Notebooks
-* Own CNN-Model with classifier see file: [ownCNNClassificationSunSpotter.ipynb](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/code/jupyterNotebook/ownCNNClassificationSunSpotter.ipynb)
-* Transer-Learning attempt with pretrained CNN-Model see file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.zhaw.ch/muon/ads-fs2021-project-sunspotter/blob/master/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
+* Own CNN-Model with classifier see file: [ownCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/ownCNNClassificationSunSpotter.ipynb)
+* Transer-Learning attempt with pretrained CNN-Model see file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
 
 ## Getting Started
 
 #### Start Sun spotter webapp and TensorBoard
-
+🚧 under construction...
 Start the sunspotter app and TensorBoard containers
 
 ```./docker-compose up```
@@ -35,7 +39,8 @@ or if you want to fore a rebuild of the containers:
 
 #### Open the sun spotter app in your web browser
 
-```http://localhost:3000/webcam/map```
+🚧 under construction...
+```http://sunspotter.ch:443```
 
 ##### Functionalities
 
@@ -44,7 +49,7 @@ or if you want to fore a rebuild of the containers:
 3. Predict all webcams: Runs a weather prediction with Tensorflow for all webcams with their live image from the actual hour (takes some time ~5min)
 
 #### Open the TensorBoard in your web browser
-
+🚧 under construction...
 ```http://localhost:6006/```
 
 ## Contributing
