@@ -1,6 +1,9 @@
 # SunSpotter - Project work aF&E HS2021 
 🕶️(:cloud_with_rain: + :sunny:) = :heartpulse:
 
+## Open SunSpotter application in you web browser
+🔗 http://sunspotter.ch:8443/
+
 Projectwork for the modul applied research and development from Martina Buchmeier, Matthias Christen and Marion Mürner.
 Supervised by Dr. Elena Gavagnin.
 
