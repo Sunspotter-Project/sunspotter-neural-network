@@ -1,11 +1,12 @@
 # SunSpotter - Project work aF&E HS2021 
 🕶️(:cloud_with_rain: + :sunny:) = :heartpulse:
 
-Projectwork for the modul applied research and development from 
-👫 Martina Buchmeier buchmmar@students.zhaw.ch
-👫 Matthias Christen chrismat@students.zhaw.ch
-👫 Marion Mürner murnemar@students.zhaw.ch
-👫 Supervised by Dr. Elena Gavagnin gava@zhaw.ch
+## Projectwork for the modul applied research and development from 
+
+ 👫 Martina Buchmeier buchmmar@students.zhaw.ch \
+ 👫 Matthias Christen chrismat@students.zhaw.ch \
+ 👫 Marion Mürner murnemar@students.zhaw.ch \
+ 👫 Supervised by Dr. Elena Gavagnin gava@zhaw.ch 
 
 _Open SunSpotter application in you web browser_
 🔗 http://sunspotter.ch/
@@ -73,9 +74,10 @@ To solve the classification problem of sunny and not sunny webcam images, transf
 Latest model can be found here: [sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5)
 
 #### Data
-Trainnig *3162* images belonging to 2 classes.
-Validation *790* images belonging to 2 classes.
-Test *252* images belonging to 2 classes.
+
+Trainnig *3162* images belonging to 2 classes \
+Validation *790* images belonging to 2 classes \
+Test *252* images belonging to 2 classes
 
 #### Summary of the Model
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ModellSummary.PNG)
@@ -84,30 +86,31 @@ Test *252* images belonging to 2 classes.
 In the following list one can see how the accurracy and the loss function developed over the epochs.
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/TrainingOutputEvolutionOfAccurracyAndLoss.PNG)
 
-And the the same as a graph
-![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ModellSummary.PNG)
+And the the view of accurracy and loss visualizes as a graph.
+![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/DiagrammOutputEvolutionOfAccurracyAndLoss.PNG)
 
 The Performance of the model was measured with a confusion matrix, prediction was made with the test dataset. Most important metric for sunspotter is the _precision for class sunny_! This is because we want to show the user, where he or she should go the get some sun.
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ConfusionMatrixTestDataSet.PNG)
 
-## Getting Started Todo @chrismat
+## Collaboration
+### Getting Started Todo @chrismat
 
-#### Start Sun spotter webapp and TensorBoard
+##### Start Sun spotter webapp 
 🚧 under construction...
-Start the sunspotter app and TensorBoard containers
+Start the sunspotter app container
 
 ```./docker-compose up```
 
-or if you want to fore a rebuild of the containers:
+or if you want to fore a rebuild of the container:
 
 ```./docker-compose up --build```
 
-#### Open the sun spotter app in your web browser
+##### Open the sun spotter app in your web browser
 
 🚧 under construction...
 ```http://sunspotter.ch:443```
 
-##### Functionalities
+###### Functionalities
 
 1. Scrape webcams: Scrape random webcams from windy.com and initializes the database
 2. Geocode all webcams: Try to geocode the webcam positions with the webcam name (if the checkbox 'Use geocode services' is checked its done with the geocode service from the openrouteservice.org. Otherwise the positions are read from earlier file cached responses from this service.)
