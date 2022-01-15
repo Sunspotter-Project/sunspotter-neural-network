@@ -63,7 +63,7 @@ Even though webcams are currently only scraped and predicted for Switzerland, it
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/WebAppScalability.png)
 
 ## Machine Learning - Jupyter Notebooks
-To solve the classification problem of sunny and not sunny webcam images, transfer learning is used. In particulary Keras and Tensorflow with its pre-trained models from TensorHub were used to develop the image classifier model for Sunspotter.
+Transfer Learning is used to solve the classification problem of sunny and not sunny webcam images. Particulary Keras and Tensorflow with its pre-trained models from TensorHub were used to develop the image classifier model for SunSpotter.
 
 * _Productive Code_ Transer-Learning with pretrained CNN-Model see file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
   * CNN model used from Tensorflow Hub" mobilenet_v3_small_075_224": "https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5",
