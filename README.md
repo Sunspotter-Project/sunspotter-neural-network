@@ -51,7 +51,7 @@ Here you can find the whole project with the issues: [SunSpotter aF&E - Project]
 ## System architecture
 
 ### Client Web Application - Overview
-The following graphic shows the parts of sun spotter application.
+The following graphic shows the parts of SunSpotter application.
 
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/WebClientArchitecture.png)
 
