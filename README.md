@@ -42,7 +42,7 @@ The most important folders are:
 | [helios](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/helios)|  Contains the code for the prediction on the web server. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  Contains the meteo measurements - used to determine sun set and sun rise. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [runner](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/runner)|  Contains the docker configuration.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  Contains the code for the Sunspotter webapp.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  Contains the code for the Sunspotter WebApp.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [voyager](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/voyager)|  Contains the code for the scraping of the webcam data.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 
  
