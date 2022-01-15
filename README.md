@@ -18,7 +18,7 @@ This project inlcudes a web application through which sunny places can be found.
 
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/classesSunnyNotSunny.PNG)
 
-Mockup of the landing page an its components
+The following picture shows a Mockup of the landing page an its components:
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/mockup.JPG)
 
 Here you can get a glimps of the real web interface. Everywhere there is an icon on the map, there is a webcam. If the picture shows good weather, a sun icon is displayed, if the picture shows bad weather, a cloud icon is displayed.
