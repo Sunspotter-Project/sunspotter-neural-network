@@ -26,13 +26,13 @@ Here you can get a glimps of the real web interface. Each icon on the map repres
 
 ## Repositories & Structure
 
-The Repositories are Splitted into two Parts:
+The repositories are divided into two parts:
 | Repository   | Description |
 |----------|:-------------|
 | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) | Current and _Main_ Repository, contains the documentation and the python code for the machine learining algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
 | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient|
 
-Most important folders: 
+The most important folders are: 
 
 | Folder   | Description | Repository |
 |----------|:-------------|----------|
