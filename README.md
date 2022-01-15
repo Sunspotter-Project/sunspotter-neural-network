@@ -57,8 +57,8 @@ The following graphic shows the parts of SunSpotter application.
 
 ### Client Web Application - Scaling
 
-If there is a lot of load, the Apache server can perform load balancing for several Sunspotter WebApp instances.
-Even though webcams are currently only scraped and predicted for Switzerland, it is planned that one Helios and one Voyager instance per country will be responsible for scraping and predicting. See following graphic.
+The Apache server can perform load balancing for several Sunspotter WebApp instances, if there is a lot of load.
+Even though webcams are currently only scraped and predicted for Switzerland, it is planned that one Helios and one Voyager instance per country will be responsible for scraping and predicting. The following graphic visualizes the load balancing.
 
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/WebAppScalability.png)
 
