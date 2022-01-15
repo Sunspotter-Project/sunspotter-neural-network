@@ -75,9 +75,9 @@ Latest model can be found here: [sunSpotter_keras_transferLearning_model_mobilen
 
 #### Data
 
-Trainnig *3162* images belonging to 2 classes \
-Validation *790* images belonging to 2 classes \
-Test *252* images belonging to 2 classes
+Trainnig _3162_ images belonging to 2 classes \
+Validation _790_ images belonging to 2 classes \
+Test _252_ images belonging to 2 classes
 
 #### Summary of the Model
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ModellSummary.PNG)
@@ -90,7 +90,11 @@ And the the view of accurracy and loss visualizes as a graph.
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/DiagrammOutputEvolutionOfAccurracyAndLoss.PNG)
 
 The Performance of the model was measured with a confusion matrix, prediction was made with the test dataset. Most important metric for sunspotter is the _precision for class sunny_! This is because we want to show the user, where he or she should go the get some sun.
-![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ConfusionMatrixTestDataSet.PNG)
+
+
+| ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ConfusionMatrixTestDataSet.PNG) |
+| :--: |
+
 
 ## Collaboration
 ### Getting Started Todo @chrismat
