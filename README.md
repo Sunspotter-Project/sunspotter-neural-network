@@ -29,24 +29,24 @@ Here you can get a glimps of the real web interface. Each icon on the map repres
 The repositories are divided into two parts:
 | Repository   | Description |
 |----------|:-------------|
-| [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) | Current and _Main_ Repository, contains the documentation and the python code for the machine learining algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
-| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient|
+| [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
+| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient.|
 
 The most important folders are: 
 
 | Folder   | Description | Repository |
 |----------|:-------------|----------|
-| [code/jupyterNotebook](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/code/jupyterNotebook) | contains the jupyternotebooksfor the model and exports of trained models | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter)  |
-| [planning](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/planning) | contains the gant chart of the project | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) |
-| [db](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/db)|  contains the database and configuration | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [helios](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/helios)|  contains the code for the prediction on the web server | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  contains the meteo measurements - used to determine sun set and sun rise | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [runner](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/runner)|  contains the docker configuration| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  contains the code for the Sunspotter WebApp| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [voyager](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/voyager)|  contains the code for the scraping of the webcam data| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [code/jupyterNotebook](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/code/jupyterNotebook) | Contains the jupyternotebooks for the model and exports of trained models. | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter)  |
+| [planning](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/planning) | Contains the gant chart of the project. | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) |
+| [db](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/db)|  Contains the database and configuration. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [helios](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/helios)|  Contains the code for the prediction on the web server. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  Contains the meteo measurements - used to determine sun set and sun rise. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [runner](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/runner)|  Contains the docker configuration.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  Contains the code for the Sunspotter webapp.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [voyager](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/voyager)|  Contains the code for the scraping of the webcam data.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 
  
-The Project with all the issues can be found here: [SunSpotter aF&E - Project](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/projects/1)
+Here you can find the whole project with the issues: [SunSpotter aF&E - Project](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/projects/1)
 
 ## System architecture
 
