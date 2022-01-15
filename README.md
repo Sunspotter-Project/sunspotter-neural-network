@@ -65,17 +65,17 @@ Even though webcams are currently only scraped and predicted for Switzerland, it
 ## Machine Learning - Jupyter Notebooks
 Transfer Learning is used to solve the classification problem of sunny and not sunny webcam images. Particulary Keras and Tensorflow with its pre-trained models from TensorHub were used to develop the image classifier model for SunSpotter.
 
-* _Productive Code_ Transer-Learning with pretrained CNN-Model see file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
+* _Productive Code_ of Transfer-Learning with pretrained CNN-Model is in the file: [transferLearningCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/transferLearningCNNClassificationSunSpotter.ipynb)
   * CNN model used from Tensorflow Hub" mobilenet_v3_small_075_224": "https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5",
-  * Fully connected layer with two classes prediction "notSunny" and "sunny"
-* _Used Just for experimentation_ The own CNN-Model with classifier see file: [ownCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/ownCNNClassificationSunSpotter.ipynb)
+  * Fully connected layer with two classes prediction "notSunny" and "sunny".
+* _Used Just for experimentation_ the own CNN-Model with classifier in the file: [ownCNNClassificationSunSpotter.ipynb](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/ownCNNClassificationSunSpotter.ipynb)
   
 ### Model
-Latest model can be found here: [sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5)
+The latest model can be found here: [sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/code/jupyterNotebook/sunSpotter_keras_transferLearning_model_mobilenet_v3_small_075_224_20220111.h5)
 
 #### Data
 
-Trainnig _3162_ images belonging to 2 classes \
+Training _3162_ images belonging to 2 classes \
 Validation _790_ images belonging to 2 classes \
 Test _252_ images belonging to 2 classes
 
@@ -83,13 +83,13 @@ Test _252_ images belonging to 2 classes
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ModellSummary.PNG)
 
 #### Model Performance
-In the following list one can see how the accurracy and the loss function developed over the epochs.
+The following list shows how the accurracy and the loss function developed over the epochs.
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/TrainingOutputEvolutionOfAccurracyAndLoss.PNG)
 
-And the the view of accurracy and loss visualizes as a graph.
+The view of accurracy and loss visualizes as a graph:
 ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/DiagrammOutputEvolutionOfAccurracyAndLoss.PNG)
 
-The Performance of the model was measured with a confusion matrix, prediction was made with the test dataset. Most important metric for sunspotter is the _precision for class sunny_! This is because we want to show the user, where he or she should go the get some sun.
+The performance of the model was measured with a confusion matrix. The prediction was made with the test dataset. Most important metric for SunSpotter is the _precision for class sunny_!. This is because of we want to show the user, where to go to get some sun.
 
 
 | ![image](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/blob/main/drawings/ConfusionMatrixTestDataSet.PNG) |
