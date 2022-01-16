@@ -1,5 +1,5 @@
 # SunSpotter - Project work aF&E HS2021 
-🕶️(:cloud_with_rain: + :sunny:) = :heartpulse:
+😎(:cloud_with_rain: + :sunny:) = :heartpulse:
 
 ## Projectwork for the modul applied research and development from 
 
