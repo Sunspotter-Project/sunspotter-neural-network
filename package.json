@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "http-errors": "^1.8.0",
-    "sqlite": "^4.0.23"
-  }
-}
