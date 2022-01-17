@@ -30,7 +30,7 @@ The repositories are divided into two parts:
 | Repository   | Description |
 |----------|:-------------|
 | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
-| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient.|
+| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient and the sunspotter services.|
 
 The most important folders are: 
 
@@ -40,7 +40,7 @@ The most important folders are:
 | [planning](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/planning) | Contains the gant chart of the project. | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) |
 | [db](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/db)|  Contains the database and configuration. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [helios](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/helios)|  Contains the code for the prediction on the web server. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  Contains the meteo measurements - used to determine sun set and sun rise. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  Contains the meteo measurements - used to scrape the CH meteo stations in a further release | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [runner](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/runner)|  Contains the docker configuration.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  Contains the code for the Sunspotter WebApp.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
 | [voyager](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/voyager)|  Contains the code for the scraping of the webcam data.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
@@ -96,26 +96,6 @@ The performance of the model was measured with a confusion matrix. The predictio
 | :--: |
 
 
-## Collaboration
-### Getting Started Todo @chrismat
+## Collaboration and Getting Started
 
-##### Start Sun spotter webapp 
-🚧 under construction...
-Start the sunspotter app container
-
-```./docker-compose up```
-
-or if you want to fore a rebuild of the container:
-
-```./docker-compose up --build```
-
-##### Open the sun spotter app in your web browser
-
-🚧 under construction...
-```http://sunspotter.ch:443```
-
-###### Functionalities
-
-1. Scrape webcams: Scrape random webcams from windy.com and initializes the database
-2. Geocode all webcams: Try to geocode the webcam positions with the webcam name (if the checkbox 'Use geocode services' is checked its done with the geocode service from the openrouteservice.org. Otherwise the positions are read from earlier file cached responses from this service.)
-3. Predict all webcams: Runs a weather prediction with Tensorflow for all webcams with their live image from the actual hour (takes some time ~5min)
+See the [README.md](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/blob/main/README.md) in the sunspotter-src repository
