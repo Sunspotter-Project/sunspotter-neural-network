@@ -1,11 +1,11 @@
-# SunSpotter - Project work aF&E HS2021 
+# SunSpotter - Project
 😎(:cloud_with_rain: + :sunny:) = :heartpulse:
 
-## Projectwork for the modul applied research and development from 
+## Contributors of the Project
 
- 👫 Martina Buchmeier buchmmar@students.zhaw.ch \
- 👫 Matthias Christen chrismat@students.zhaw.ch \
- 👫 Marion Mürner murnemar@students.zhaw.ch \
+ 👫 Martina Buchmeier buchmmar@students.zhaw.ch (e-mail obsolete) \
+ 👫 Matthias Christen matthias.christen@posity.ch \
+ 👫 Marion Mürner marion.muerner@posity.ch \
  👫 Supervised by Dr. Elena Gavagnin gava@zhaw.ch 
 
 _Open SunSpotter application in you web browser_
@@ -29,25 +29,24 @@ Here you can get a glimps of the real web interface. Each icon on the map repres
 The repositories are divided into two parts:
 | Repository   | Description |
 |----------|:-------------|
-| [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
-| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src) | Web-Client Repository, contains the code for the webclient and the sunspotter services.|
+| [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
+| [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev) | Web-Client Repository, contains the code for the webclient and the sunspotter services.|
 
-The most important folders are: 
+The most important folders or submodules are: 
 
-| Folder   | Description | Repository |
+| Folder/Submodule | Description | Repository |
 |----------|:-------------|----------|
-| [code/jupyterNotebook](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/code/jupyterNotebook) | Contains the jupyternotebooks for the model and exports of trained models. | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter)  |
-| [planning](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/tree/main/planning) | Contains the gant chart of the project. | [afell-hs2021-project-sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter) |
-| [db](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/db)|  Contains the database and configuration. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [helios](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/helios)|  Contains the code for the prediction on the web server. | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [meteo/CH](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/meteo/CH)|  Contains the meteo measurements - used to scrape the CH meteo stations in a further release | [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [runner](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/runner)|  Contains the code for the runner which triggers the helios and voyager instances.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [sunspotter](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/sunspotter)|  Contains the code for the Sunspotter WebApp.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [voyager](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/voyager)|  Contains the code for the scraping of the webcam data.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
-| [shared](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/tree/main/shared)|  Contains the code shared between all code projects.| [sunspotter-src](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src)|
+| [code/jupyterNotebook](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/tree/main/code/jupyterNotebook) | Contains the jupyternotebooks for the model and exports of trained models. | [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network)  |
+| [planning](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/tree/main/planning) | Contains the gant chart of the project. | [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network)|
+| [db](https://github.com/Sunspotter-Project/db)|  Contains the database and configuration. |[sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
+| [helios](https://github.com/Sunspotter-Project/helios)|  Contains the code for the prediction on the web server. | [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
+| [runner](https://github.com/Sunspotter-Project/runner)|  Contains the code for the runner which triggers the helios and voyager instances.| [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
+| [sunspotter](https://github.com/Sunspotter-Project/webapp)|  Contains the code for the Sunspotter WebApp.| [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
+| [voyager](https://github.com/Sunspotter-Project/voyager)|  Contains the code for the scraping of the webcam data.| [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
+| [shared](https://github.com/Sunspotter-Project/shared)|  Contains the code shared between all code projects.|[sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
 
  
-Here you can find the whole project with the issues: [SunSpotter aF&E - Project](https://github.com/ZHAW-WI-AFEII-Project-HS2021/afeII-hs2021-project-sunspotter/projects/1)
+Here you can find the whole project with the issues: [Sunspotter - Project](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/projects/1)
 
 ## System architecture
 
@@ -99,4 +98,4 @@ The performance of the model was measured with a confusion matrix. The predictio
 
 ## Collaboration and Getting Started
 
-See the [README.md](https://github.com/ZHAW-WI-AFEII-Project-HS2021/sunspotter-src/blob/main/README.md) in the sunspotter-src repository
+See the [README.md](https://github.com/Sunspotter-Project/sunspotter-dev) in the sunspotter-dev repository or contact one of us ㋡
