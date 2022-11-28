@@ -3,7 +3,7 @@
 
 ## Contributors of the Project
 
- 👫 Martina Buchmeier buchmmar@students.zhaw.ch (e-mail obsolete) \
+ 👫 Martina Buchmeier marberbu@hotmail.ch \
  👫 Matthias Christen matthias.christen@posity.ch \
  👫 Marion Mürner marion.muerner@posity.ch \
  👫 Supervised by Dr. Elena Gavagnin gava@zhaw.ch 
