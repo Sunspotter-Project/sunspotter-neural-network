@@ -6,7 +6,7 @@
  👫 Martina Buchmeier marberbu@hotmail.ch \
  👫 Matthias Christen matthias.christen@posity.ch \
  👫 Marion Mürner marion.muerner@posity.ch \
- 👫 Supervised by Dr. Elena Gavagnin gava@zhaw.ch 
+ 👫 Supervised by Dr. Elena Gavagnin elena.gavagnin@zhaw.ch 
 
 _Open SunSpotter application in you web browser_
 🔗 https://www.sunspotter.ch/
