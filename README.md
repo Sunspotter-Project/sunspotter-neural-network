@@ -29,15 +29,14 @@ Here you can get a glimps of the real web interface. Each icon on the map repres
 The repositories are divided into two parts:
 | Repository   | Description |
 |----------|:-------------|
-| [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
+| [sunspotter-neural-network](https://github.com/Sunspotter-Project/sunspotter-neural-network) | Current and _Main_ Repository, contains the documentation and the python code for the machine learninig algortihm (Jupyter-Notebooks) and the project organization parts like Github-Project and issues.|
 | [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev) | Web-Client Repository, contains the code for the webclient and the sunspotter services.|
 
 The most important folders or submodules are: 
 
 | Folder/Submodule | Description | Repository |
 |----------|:-------------|----------|
-| [code/jupyterNotebook](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/tree/main/code/jupyterNotebook) | Contains the jupyternotebooks for the model and exports of trained models. | [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network)  |
-| [planning](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/tree/main/planning) | Contains the gant chart of the project. | [sunspotter-neuronal-network](https://github.com/Sunspotter-Project/sunspotter-neuronal-network)|
+| [code/jupyterNotebook](https://github.com/Sunspotter-Project/sunspotter-neural-network/tree/main/code/jupyterNotebook) | Contains the jupyternotebooks for the model and exports of trained models. | [sunspotter-neural-network](https://github.com/Sunspotter-Project/sunspotter-neural-network)  |
 | [db](https://github.com/Sunspotter-Project/db)|  Contains the database and configuration. |[sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
 | [helios](https://github.com/Sunspotter-Project/helios)|  Contains the code for the prediction on the web server. | [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
 | [runner](https://github.com/Sunspotter-Project/runner)|  Contains the code for the runner which triggers the helios and voyager instances.| [sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
@@ -46,7 +45,7 @@ The most important folders or submodules are:
 | [shared](https://github.com/Sunspotter-Project/shared)|  Contains the code shared between all code projects.|[sunspotter-dev](https://github.com/Sunspotter-Project/sunspotter-dev)|
 
  
-Here you can find the whole project with the issues: [Sunspotter - Project](https://github.com/Sunspotter-Project/sunspotter-neuronal-network/projects/1)
+Here you can find the whole project with the issues: [Sunspotter - Project](https://github.com/Sunspotter-Project/sunspotter-neural-network/projects/1)
 
 ## System architecture
 
